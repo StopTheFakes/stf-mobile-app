@@ -1,0 +1,28 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerAppsSendSignal"
+        style="@style/scrollbar_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:fadeScrollbars="false"
+        android:paddingStart="@dimen/default_size"
+        android:scrollbars="vertical"
+        android:verticalScrollbarPosition="right"
+        tools:listitem="@layout/list_item_application"
+        android:layout_above="@+id/bottomNavigation"/>
+
+    <include
+        android:id="@+id/bottomNavigation"
+        layout="@layout/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

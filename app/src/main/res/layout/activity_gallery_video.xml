@@ -1,0 +1,134 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.gallery.GalleryMainActivity">
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollview"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp">
+
+        <LinearLayout
+            android:id="@+id/imagesLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/image1"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/jordan2"
+                app:riv_corner_radius="10dp" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/image2"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/jordan3"
+                app:riv_corner_radius="10dp" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/image3"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/jordan4"
+                app:riv_corner_radius="10dp" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/image4"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/jordan5"
+                app:riv_corner_radius="10dp" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/image5"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/jordan6"
+                app:riv_corner_radius="10dp" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <FrameLayout
+        android:id="@+id/cameraPreview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/rounded_edit_text"
+        android:layout_above="@+id/sendSignalButton"
+        android:layout_below="@+id/horizontalScrollview"
+        android:layout_margin="@dimen/activity_horizontal_margin" />
+
+    <Button
+        android:id="@+id/sendSignalButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottomLayout"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@drawable/rounded_send_signal_transparent"
+        android:text="@string/send_signal_button"
+        android:textAllCaps="false"
+        android:textColor="@color/border_button"
+        android:textSize="@dimen/text_size_extra_large_20" />
+
+    <LinearLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@color/application_inactive"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp">
+
+        <TextView
+            android:id="@+id/returnBackTitle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/return_back_title"
+            android:textSize="@dimen/text_size_very_large_18" />
+
+        <ImageButton
+            android:id="@+id/makePhotoButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_send_signal_transparent"
+            android:src="@drawable/ic_photo_camera" />
+
+        <ImageButton
+            android:id="@+id/makeVideoButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_take_in_work_button"
+            android:src="@drawable/ic_antique_cinema_camera_white" />
+
+    </LinearLayout>
+</RelativeLayout>

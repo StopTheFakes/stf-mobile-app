@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#0b5091</color>
+    <color name="colorAccent">#42d25b</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="recycler_divider">#1A000000</color>
+
+    <!-- Black text -->
+    <color name="textColorPrimary">#D9000000</color>
+    <color name="textColorSecondary">#8C000000</color>
+
+    <!-- White text -->
+    <color name="textWhiteColorPrimary">#FFFFFFFF</color>
+    <color name="textWhiteColorSecondary">#BFFFFFFF</color>
+
+    <!--Authorization-->
+    <color name="auth_edit_text_background">#f7f7f7</color>
+
+    <color name="send_signal_button">#42d25b</color>
+    <color name="take_in_work_button">#ff1212</color>
+    <color name="application_inactive">#eef1f6</color>
+
+    <color name="background">#1f71c1</color>
+    <color name="transparent">#00000000</color>
+    <color name="scroll_track">#629dd3</color>
+    <color name="scroll_thumb">#fbfbfb</color>
+    <color name="border_button">#76818f</color>
+    <color name="on_watching">#edf2f8</color>
+    <color name="blue_text">#2681d9</color>
+
+
+
+</resources>

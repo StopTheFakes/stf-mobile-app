@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/first2TextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/writingMessageLayout"
+        android:background="@color/white"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/man2TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_chat_1"
+            android:padding="8dp"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:text="Your Alert #№271-2937 is submitted to be reviewed by the Requestor"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_large" />
+
+        <TextView
+            android:id="@+id/man3TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/rounded_chat_2"
+            android:padding="8dp"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:text="The Requestor has accepted your Alert. A 50STF remuneration has been deposited to your account."
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_large" />
+
+    </LinearLayout>
+
+</RelativeLayout>

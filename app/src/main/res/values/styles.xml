@@ -1,0 +1,61 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppThemeForItemList" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:background">@color/transparent</item>
+    </style>
+
+    <!--Authorization-->
+    <style name="auth_text_input_style">
+        <item name="android:layout_marginStart">32dp</item>
+        <item name="android:layout_marginEnd">32dp</item>
+    </style>
+
+    <style name="auth_edit_text_style">
+        <item name="android:layout_marginStart">24dp</item>
+        <item name="android:layout_marginEnd">24dp</item>
+    </style>
+
+    <style name="Button">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/textWhiteColorPrimary</item>
+    </style>
+
+    <style name="scrollbar_style">
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:fadeScrollbars">true</item>
+        <item name="android:scrollbarThumbVertical">@drawable/scroll_thumb</item>
+        <item name="android:scrollbarTrackVertical">@drawable/scroll_track</item>
+        <item name="android:scrollbarSize">6dp</item>
+        <item name="android:scrollbarFadeDuration">800</item>
+        <item name="android:scrollbarDefaultDelayBeforeFade">500</item>
+    </style>
+
+    <style name="Separator">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/recycler_divider</item>
+        <item name="android:layout_marginStart">@dimen/default_size</item>
+        <item name="android:layout_marginEnd">@dimen/default_size</item>
+    </style>
+
+    <style name="SeparatorWithoutMargin">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/recycler_divider</item>
+        <item name="android:layout_marginTop">@dimen/half_default_size</item>
+        <item name="android:layout_marginBottom">@dimen/half_default_size</item>
+    </style>
+
+</resources>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@color/application_inactive"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp">
+
+    <ImageButton
+        android:id="@+id/addMultimediaButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:background="@drawable/rounded_add_button"
+        android:src="@drawable/ic_add_white_24dp" />
+
+    <EditText
+        android:id="@+id/chatWriteMessageEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_toEndOf="@+id/addMultimediaButton"
+        android:layout_toStartOf="@+id/sendMessageButton"
+        android:background="@drawable/rounded_edit_text_white"
+        android:hint="@string/enter_message_text_hint"
+        android:inputType="textWebEditText"
+        android:maxLines="1"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:textColor="@color/textColorSecondary"
+        android:textCursorDrawable="@null" />
+
+    <ImageButton
+        android:id="@+id/sendMessageButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:background="@drawable/rounded_button"
+        android:src="@drawable/ic_forward_arrow_white" />
+
+</RelativeLayout>

@@ -1,0 +1,194 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/writingMessageLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/application_inactive">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/countryImageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@color/transparent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/man1"
+            app:riv_border_color="@color/white"
+            app:riv_border_width="2dp"
+            app:riv_oval="true" />
+
+        <TextView
+            android:id="@+id/man1NameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/countryImageView"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_toEndOf="@+id/countryImageView"
+            android:background="@color/transparent"
+            android:text="Jerry Snyder"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_extra_large_20"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/writingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/man1NameTextView"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_toEndOf="@+id/countryImageView"
+            android:background="@color/transparent"
+            android:text="Набирает сообщение..."
+            android:textSize="@dimen/text_size_medium" />
+
+        <TextView
+            android:id="@+id/citiesListTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:background="@color/transparent"
+            android:text="Online"
+            android:textSize="@dimen/text_size_large" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/first2TextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/writingMessageLayout"
+        android:background="@color/white">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/man11ImageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/transparent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/man1"
+            app:riv_border_color="@color/white"
+            app:riv_border_width="2dp"
+            app:riv_oval="true" />
+
+        <TextView
+            android:id="@+id/man2TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/man4TextView"
+            android:layout_alignTop="@+id/man11ImageView"
+            android:layout_toEndOf="@+id/man11ImageView"
+            android:background="@drawable/rounded_chat_1"
+            android:padding="8dp"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:text="Hello! You've sent Alert #125-45612 regarding Request #654-45123. Unfortunately, the information you've submitted doesn't meet the Requestor's requirements. In the task, you had to take 3 pictures of the the shop's front where you found counterfeit goods. The Alert you've sent contains 3 empty pictures, that is, files without images. Please, record the violation one more time."
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_large" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/man21ImageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/man2TextView"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:background="@color/transparent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/man2"
+            app:riv_border_color="@color/white"
+            app:riv_border_width="2dp"
+            app:riv_oval="true" />
+
+        <TextView
+            android:id="@+id/man4TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/man21ImageView"
+            android:layout_marginStart="52dp"
+            android:layout_toStartOf="@+id/man21ImageView"
+            android:background="@drawable/rounded_chat_3"
+            android:padding="8dp"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:text="How can I do it?"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_large" />
+
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/man13ImageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/man4TextView"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:background="@color/transparent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/man1"
+            app:riv_border_color="@color/white"
+            app:riv_border_width="2dp"
+            app:riv_oval="true" />
+
+        <TextView
+            android:id="@+id/man6TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/man4TextView"
+            android:layout_alignTop="@+id/man13ImageView"
+            android:layout_toEndOf="@+id/man13ImageView"
+            android:background="@drawable/rounded_chat_1"
+            android:padding="8dp"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:text="You need to take this task again and provide a report within the time specified."
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_large" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/man41ImageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/man6TextView"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:background="@color/transparent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/man2"
+            app:riv_border_color="@color/white"
+            app:riv_border_width="2dp"
+            app:riv_oval="true" />
+
+        <TextView
+            android:id="@+id/man7TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/man41ImageView"
+            android:layout_marginStart="52dp"
+            android:layout_toStartOf="@+id/man41ImageView"
+            android:background="@drawable/rounded_chat_3"
+            android:padding="8dp"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:text="Got it, thanks."
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_large" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

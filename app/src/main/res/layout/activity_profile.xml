@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/scrollbar_style"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background"
+    android:fadeScrollbars="false"
+    android:paddingEnd="4dp"
+    android:scrollbars="vertical"
+    android:verticalScrollbarPosition="right">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/default_size"
+        android:paddingBottom="@dimen/default_size"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_white"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/default_size">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:drawablePadding="@dimen/half_default_size"
+                android:drawableStart="@drawable/ic_settings"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/half_default_size"
+                android:text="@string/profile_settings"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:background="#eef1f6"
+                android:orientation="horizontal">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/countryImageView"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/transparent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/man1"
+                    app:riv_border_color="@color/white"
+                    app:riv_border_width="4dp"
+                    app:riv_oval="true" />
+
+                <LinearLayout
+                    android:layout_width="190dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/default_size"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_white">
+
+                        <Spinner
+                            android:id="@+id/spinnerCountry"
+                            android:layout_width="match_parent"
+                            android:layout_height="41dp"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_white"
+                        android:layout_marginTop="@dimen/half_default_size" >
+
+                        <Spinner
+                            android:id="@+id/spinnerCity"
+                            android:layout_width="match_parent"
+                            android:layout_height="41dp" />
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_size"
+                android:layout_marginTop="@dimen/default_size"
+                android:text="@string/personal_infrormation"
+                android:textColor="@color/blue_text"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <View
+                style="@style/Separator"
+                android:layout_marginBottom="@dimen/half_default_size"
+                android:layout_marginTop="@dimen/half_default_size"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="@dimen/half_default_size"
+                android:layout_marginEnd="@dimen/default_size"
+                android:layout_marginStart="@dimen/default_size"
+                android:background="@drawable/rounded_edit_text"
+                android:drawableEnd="@drawable/ic_user"
+                android:hint="Enter your name"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:nextFocusForward="@+id/passwordEditText"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:textColor="@color/textColorSecondary"
+                android:textCursorDrawable="@null" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="@dimen/half_default_size"
+                android:layout_marginEnd="@dimen/default_size"
+                android:layout_marginStart="@dimen/default_size"
+                android:background="@drawable/rounded_edit_text"
+                android:drawableEnd="@drawable/ic_email"
+                android:hint="Enter your email"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:nextFocusForward="@+id/passwordEditText"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:textColor="@color/textColorSecondary"
+                android:textCursorDrawable="@null" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginBottom="@dimen/half_default_size"
+                android:layout_marginEnd="@dimen/default_size"
+                android:layout_marginStart="@dimen/default_size"
+                android:background="@drawable/rounded_edit_text"
+                android:drawableEnd="@drawable/ic_chat"
+                android:gravity="start"
+                android:hint="Enter text"
+                android:imeOptions="actionNext"
+                android:nextFocusForward="@+id/passwordEditText"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="@dimen/half_default_size"
+                android:textColor="@color/textColorSecondary"
+                android:textCursorDrawable="@null" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_size"
+            android:background="@drawable/rounded_white"
+            android:orientation="vertical"
+            android:padding="@dimen/default_size">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/status_and_rating"
+                android:textColor="@color/blue_text"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <View
+                style="@style/Separator"
+                android:layout_marginBottom="@dimen/half_default_size"
+                android:layout_marginTop="@dimen/half_default_size"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/status"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/half_default_size"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/medium"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="172 points left to level up"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_marginTop="@dimen/half_default_size"
+                android:background="@drawable/rounded_gray"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_favourite" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_thumbs_up_hand_symbol" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:rotation="180"
+                        android:src="@drawable/ic_thumbs_up_hand_symbol" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_attention" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="500"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="200"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="90"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="4"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_size"
+            android:background="@drawable/rounded_white"
+            android:orientation="vertical"
+            android:padding="@dimen/default_size">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/payment"
+                android:textColor="@color/blue_text"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <View style="@style/SeparatorWithoutMargin"
+                android:layout_marginTop="@dimen/half_default_size"/>
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="@dimen/half_default_size"
+                android:background="@drawable/rounded_edit_text"
+                android:drawableEnd="@drawable/ic_wallet"
+                android:hint="Enter text"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:nextFocusForward="@+id/passwordEditText"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:textColor="@color/textColorSecondary"
+                android:textCursorDrawable="@null" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bonus coefficient"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="5%"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_size"
+            android:background="@drawable/rounded_white"
+            android:orientation="vertical"
+            android:padding="@dimen/default_size">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notify settings"
+                android:textColor="@color/blue_text"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <View style="@style/SeparatorWithoutMargin"
+                android:layout_marginTop="@dimen/half_default_size"/>
+
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/blue_text"
+                    android:text="Instantly"
+                    android:textColor="@color/textColorSecondary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/blue_text"
+                    android:text="@string/not_more_than_once_every_6_hours"
+                    android:textColor="@color/textColorSecondary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/blue_text"
+                    android:text="@string/not_more_than_once_every_12_hours"
+                    android:textColor="@color/textColorSecondary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/blue_text"
+                    android:text="@string/not_more_than_once_a_day"
+                    android:textColor="@color/textColorSecondary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/blue_text"
+                    android:text="Turn off notifications"
+                    android:textColor="@color/textColorSecondary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </RadioGroup>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_size"
+            android:layout_marginTop="@dimen/default_size"
+            android:background="@drawable/rounded_white"
+            android:orientation="vertical"
+            android:padding="@dimen/default_size">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Change password"
+                android:textColor="@color/blue_text"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <View style="@style/SeparatorWithoutMargin" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="@dimen/half_default_size"
+                android:background="@drawable/rounded_edit_text"
+                android:drawableEnd="@drawable/ic_dark_eye"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
+                android:nextFocusForward="@+id/passwordEditText"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:text="Enter the current password"
+                android:textColor="@color/textColorSecondary"
+                android:textCursorDrawable="@null" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="@dimen/half_default_size"
+                android:background="@drawable/rounded_edit_text"
+                android:drawableEnd="@drawable/ic_dark_eye"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
+                android:nextFocusForward="@+id/passwordEditText"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:textColor="@color/textColorSecondary"
+                android:text="Enter the new password"
+                android:textCursorDrawable="@null" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    style="@style/Button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_red"
+                    android:text="@string/chancel" />
+
+                <Button
+                    style="@style/Button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_size"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_green_button"
+                    android:text="@string/save" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

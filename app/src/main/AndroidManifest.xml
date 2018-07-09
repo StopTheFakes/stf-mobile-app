@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="user.com.stopthefakes">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera2.full" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <application
+        android:name="user.com.stopthefakes.App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="user.com.stopthefakes.ui.gallery.GalleryMainActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name="user.com.stopthefakes.AuthorizationActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="user.com.stopthefakes.ui.application.list.ApplicationsListActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name="user.com.stopthefakes.ui.application.applications.InWorkApplicationActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name="user.com.stopthefakes.ui.application.applications.ApplicationActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="user.com.stopthefakes.ui.offender.OffenderActivity"
+            android:screenOrientation="portrait">
+
+            </activity>
+        <activity android:name="user.com.stopthefakes.ui.signal.SignalAcceptedActivity"
+            android:screenOrientation="portrait">
+
+            </activity>
+        <activity android:name="user.com.stopthefakes.ui.chat.ChatActivity"
+            android:screenOrientation="portrait">
+
+            </activity>
+        <activity android:name="user.com.stopthefakes.ui.application.all.AllSignalsActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name="user.com.stopthefakes.ProfileActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="user.com.stopthefakes.SettingsActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name="user.com.stopthefakes.ui.history.FinanceHistoryActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name="user.com.stopthefakes.ui.application.signal.SendSignalPageActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+    </application>
+
+</manifest>
