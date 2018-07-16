@@ -10,25 +10,26 @@ import butterknife.Unbinder;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    @Nullable
-    private Unbinder unbinder;
+	@Nullable
+	private Unbinder unbinder;
 
-    protected final void setUnbinder(Unbinder unbinder) {
-        this.unbinder = unbinder;
-    }
+	protected final void setUnbinder(Unbinder unbinder) {
+		this.unbinder = unbinder;
+	}
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+	@Override
+	protected void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+	}
 
-    @CallSuper
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (unbinder != null) {
-            unbinder.unbind();
-            unbinder = null;
-        }
-    }
+	@CallSuper
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if (unbinder != null) {
+			unbinder.unbind();
+			unbinder = null;
+		}
+	}
+
 }

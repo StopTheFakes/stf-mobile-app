@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">StopTheFakes</string>
     <!--AuthorizationActivity-->
-    <string name="authorization_email_hint">E-mail</string>
+    <string name="authorization_email_hint">E-mail1</string>
     <string name="authorization_password_hint">Password</string>
     <string name="button_sign_up">Sign up</string>
     <string name="invalid_email_error">Email is not valid</string>
