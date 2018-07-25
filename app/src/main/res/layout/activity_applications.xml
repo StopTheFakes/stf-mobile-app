@@ -1,74 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/main_background"
-        android:layout_above="@+id/bottomNavigation"
-        android:orientation="vertical">
+	<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@drawable/main_background"
+		android:layout_above="@+id/bottomNavigation"
+		android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/filtersLayout"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginEnd="@dimen/default_size"
-            android:layout_marginStart="@dimen/default_size"
-            android:layout_marginTop="@dimen/default_size"
-            android:background="@drawable/rounded_text"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+		<LinearLayout
+			android:id="@+id/filtersLayout"
+			android:layout_width="match_parent"
+			android:layout_height="50dp"
+			android:layout_marginEnd="@dimen/default_size"
+			android:layout_marginStart="@dimen/default_size"
+			android:layout_marginTop="@dimen/default_size"
+			android:background="@drawable/rounded_text"
+			android:orientation="horizontal"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent">
 
+			<TextView
+				android:id="@+id/newestTextView"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:background="@drawable/rounded_text_view_left"
+				android:gravity="center"
+				android:text="@string/newest_items_title"
+				android:textSize="@dimen/text_size_extra_large_20" />
 
-            <TextView
-                android:id="@+id/newestTextView"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_text_view_left"
-                android:gravity="center"
-                android:text="@string/newest_items_title"
-                android:textSize="@dimen/text_size_extra_large_20" />
+			<TextView
+				android:id="@+id/popularTextView"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:background="@color/transparent"
+				android:gravity="center"
+				android:text="@string/popular_items_title"
+				android:textColor="@color/white"
+				android:textSize="@dimen/text_size_extra_large_20" />
 
-            <TextView
-                android:id="@+id/popularTextView"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/transparent"
-                android:gravity="center"
-                android:text="@string/popular_items_title"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_extra_large_20" />
-        </LinearLayout>
+		</LinearLayout>
 
+		<android.support.v7.widget.RecyclerView
+			android:id="@+id/applicationsRecyclerView"
+			style="@style/scrollbar_style"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="4dp"
+			android:layout_marginTop="@dimen/activity_vertical_margin"
+			android:fadeScrollbars="false"
+			android:paddingStart="@dimen/default_size"
+			android:paddingEnd="@dimen/default_size"
+			android:scrollbars="vertical"
+			android:verticalScrollbarPosition="right"
+			tools:listitem="@layout/list_item_application" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/applicationsRecyclerView"
-            style="@style/scrollbar_style"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:fadeScrollbars="false"
-            android:paddingStart="@dimen/default_size"
-            android:scrollbars="vertical"
-            android:verticalScrollbarPosition="right"
-            tools:listitem="@layout/list_item_application" />
+	</LinearLayout>
 
-    </LinearLayout>
-
-    <include
-        android:id="@+id/bottomNavigation"
-        layout="@layout/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true" />
+	<include
+		android:id="@+id/bottomNavigation"
+		layout="@layout/bottom_navigation"
+		android:layout_width="match_parent"
+		android:layout_height="60dp"
+		android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

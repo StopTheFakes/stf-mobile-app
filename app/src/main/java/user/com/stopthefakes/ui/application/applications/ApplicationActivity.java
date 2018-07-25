@@ -28,143 +28,148 @@ import user.com.stopthefakes.ui.gallery.CustomImageContainer;
 
 public class ApplicationActivity extends BaseActivity {
 
-    @BindView(R.id.imageContainer)
-    CustomImageContainer mImageContainer;
-    @BindView(R.id.photoInfoDetails)
-    TextView photoInfoDetails;
-    @BindView(R.id.detailsHeader)
-    TextView detailsHeader;
-    @BindView(R.id.countryTextView)
-    TextView countryTextView;
-    @BindView(R.id.citiesListTextView)
-    TextView citiesListTextView;
-    @BindView(R.id.descriptionDetails)
-    TextView descriptionDetails;
-    @BindView(R.id.rightsInfoTextView)
-    TextView rightsInfoTextView;
-    @BindView(R.id.tipesInfoTextView)
-    TextView tipesInfoTextView;
-    @BindView(R.id.photosQuantityTextView)
-    TextView photosQuantityTextView;
-    @BindView(R.id.videosQuantityTextView)
-    TextView videosQuantityTextView;
-    @BindView(R.id.pictureQuantityTextView)
-    TextView pictureQuantityTextView;
-    @BindView(R.id.automobileCheckBox)
-    TextView automobileCheckBox;
-    @BindView(R.id.logoCheckBox)
-    TextView logoCheckBox;
-    @BindView(R.id.container_for_checkbox)
-    LinearLayout container_for_checkbox;
-    @BindView(R.id.countryImageView)
-    RoundedImageView countryImageView;
+	@BindView(R.id.imageContainer)
+	CustomImageContainer mImageContainer;
+	@BindView(R.id.photoInfoDetails)
+	TextView photoInfoDetails;
+	@BindView(R.id.detailsHeader)
+	TextView detailsHeader;
+	@BindView(R.id.countryTextView)
+	TextView countryTextView;
+	@BindView(R.id.citiesListTextView)
+	TextView citiesListTextView;
+	@BindView(R.id.descriptionDetails)
+	TextView descriptionDetails;
+	@BindView(R.id.rightsInfoTextView)
+	TextView rightsInfoTextView;
+	@BindView(R.id.tipesInfoTextView)
+	TextView tipesInfoTextView;
+	@BindView(R.id.photosQuantityTextView)
+	TextView photosQuantityTextView;
+	@BindView(R.id.videosQuantityTextView)
+	TextView videosQuantityTextView;
+	@BindView(R.id.pictureQuantityTextView)
+	TextView pictureQuantityTextView;
+	@BindView(R.id.automobileCheckBox)
+	TextView automobileCheckBox;
+	@BindView(R.id.logoCheckBox)
+	TextView logoCheckBox;
+	@BindView(R.id.container_for_checkbox)
+	LinearLayout container_for_checkbox;
+	@BindView(R.id.countryImageView)
+	RoundedImageView countryImageView;
 
-    int id;
-    DbApplication mDbApplication;
-
-
-    public static Intent newInstance(Context context) {
-        return new Intent(context, ApplicationActivity.class);
-    }
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_application_details);
-        setUnbinder(ButterKnife.bind(this));
-
-        id = (int) getIntent().getExtras().get("id");
-        mDbApplication = App.getApp().getApplicationList().get(id);
-
-        for (int i = 0; i < mDbApplication.getImages().length; i++) {
-            mImageContainer.addImage(mDbApplication.getImages()[i]);
-        }
+	int id;
+	DbApplication mDbApplication;
 
 
-        descriptionDetails.setText(mDbApplication.getShordDescription());
-        detailsHeader.setText(mDbApplication.getHeader());
-        countryTextView.setText(mDbApplication.getCountry());
+	public static Intent newInstance(Context context) {
+		return new Intent(context, ApplicationActivity.class);
+	}
 
 
-        photoInfoDetails.setText(mDbApplication.getAlerts()[0]);
-        rightsInfoTextView.setText(mDbApplication.getRightToUser());
-        tipesInfoTextView.setText(mDbApplication.getTipes());
+	@Override
+	protected void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_application_details);
+		setUnbinder(ButterKnife.bind(this));
 
-        mImageContainer.setClickListener(new CustomImageContainer.IClickListener() {
-            @Override
-            public void onClick(int position) {
+		id = (int) getIntent().getExtras().get("id");
+		mDbApplication = App.getApp().getApplicationList().get(id);
 
-                photoInfoDetails.setText(mDbApplication.getAlerts()[position]);
-            }
+		for (int i = 0; i < mDbApplication.getImages().length; i++) {
+			mImageContainer.addImage(mDbApplication.getImages()[i]);
+		}
 
-            @Override
-            public void hideImage() {
-            }
-        });
+		descriptionDetails.setText(mDbApplication.getShordDescription());
+		detailsHeader.setText(mDbApplication.getHeader());
+		countryTextView.setText(mDbApplication.getCountry());
 
-        String cities = mDbApplication.getCitiesList().get(0);
-        for (int i = 1; i < mDbApplication.getCitiesList().size(); i++) {
-            cities = cities + ", " + mDbApplication.getCitiesList().get(i);
-        }
-        citiesListTextView.setText(cities);
+		photoInfoDetails.setText(mDbApplication.getAlerts()[0]);
+		rightsInfoTextView.setText(mDbApplication.getRightToUser());
+		tipesInfoTextView.setText(mDbApplication.getTipes());
 
-        for (Value value : mDbApplication.getPhotoVideo()) {
-            if (value.type == 1) {
-                photosQuantityTextView.setVisibility(View.VISIBLE);
-                photosQuantityTextView.setText(value.value + " STF");
-            }
-            if (value.type == 2) {
-                videosQuantityTextView.setVisibility(View.VISIBLE);
-                videosQuantityTextView.setText(value.value + " STF");
-            }
-            if (value.type == 3) {
-                pictureQuantityTextView.setVisibility(View.VISIBLE);
-                pictureQuantityTextView.setText(value.value + " STF");
-            }
-        }
-        logoCheckBox.setText(mDbApplication.getSearchOpject());
-        automobileCheckBox.setText(mDbApplication.getTopik());
+		mImageContainer.setClickListener(new CustomImageContainer.IClickListener() {
+			@Override
+			public void onClick(int position) {
+				photoInfoDetails.setText(mDbApplication.getAlerts()[position]);
+			}
 
-        for (String value : mDbApplication.getAccepted()) {
-            CheckBox checkBox = new CheckBox(this);
-            checkBox.setChecked(true);
-            checkBox.setText(value);
-            container_for_checkbox.addView(checkBox);
-        }
+			@Override
+			public void hideImage() {
+			}
+		});
 
-        if (mDbApplication.getCountry().equals("England")) {
-            countryImageView.setImageResource(R.drawable.en_flag);
-        } else if (mDbApplication.getCountry().equals("USA")) {
-            countryImageView.setImageResource(R.drawable.us_flag);
-        } else if (mDbApplication.getCountry().equals("Poland")) {
-            countryImageView.setImageResource(R.drawable.po_flag);
-        }
-    }
+		String cities = mDbApplication.getCitiesList().get(0);
+		for (int i = 1; i < mDbApplication.getCitiesList().size(); i++) {
+			cities = cities + ", " + mDbApplication.getCitiesList().get(i);
+		}
 
-    @OnClick(R.id.returnBackTextView)
-    public void returnBack() {
-        onBackPressed();
-    }
+		citiesListTextView.setText(cities);
 
-    @OnClick(R.id.takeInWorkButton)
-    public void clickTakeInWork() {
-        mDbApplication.setType(1);
-        startActivity(InWorkApplicationActivity.newInstance(this).putExtra("id", id));
-    }
+		for (Value value : mDbApplication.getPhotoVideo()) {
+			if (value.type == 1) {
+				photosQuantityTextView.setVisibility(View.VISIBLE);
+				photosQuantityTextView.setText(value.value + " STF");
+			}
+			if (value.type == 2) {
+				videosQuantityTextView.setVisibility(View.VISIBLE);
+				videosQuantityTextView.setText(value.value + " STF");
+			}
+			if (value.type == 3) {
+				pictureQuantityTextView.setVisibility(View.VISIBLE);
+				pictureQuantityTextView.setText(value.value + " STF");
+			}
+		}
 
-    @OnClick(R.id.goToMainScreenButton)
-    public void openStartPage() {
-        startActivity(ApplicationsListActivity.newInstance(this));
-    }
+		logoCheckBox.setText(mDbApplication.getSearchOpject());
+		automobileCheckBox.setText(mDbApplication.getTopik());
 
-    @OnClick(R.id.sendSignalNavigationButton)
-    public void openSignals() {
-        startActivity(SendSignalPageActivity.newInstance(this));
-    }
+		for (String value : mDbApplication.getAccepted()) {
+			CheckBox checkBox = new CheckBox(this);
+			checkBox.setChecked(true);
+			checkBox.setText(value);
+			container_for_checkbox.addView(checkBox);
+		}
+
+		if (mDbApplication.getCountry().equals("England")) {
+			countryImageView.setImageResource(R.drawable.en_flag);
+		} else if (mDbApplication.getCountry().equals("USA")) {
+			countryImageView.setImageResource(R.drawable.us_flag);
+		} else if (mDbApplication.getCountry().equals("Poland")) {
+			countryImageView.setImageResource(R.drawable.po_flag);
+		}
+	}
 
 
-    @OnClick(R.id.goToMenuPageButton)
-    protected void openSettings() {
-        startActivity(new Intent(this, SettingsActivity.class));
-    }
+	@OnClick(R.id.returnBackTextView)
+	public void returnBack() {
+		onBackPressed();
+	}
+
+
+	@OnClick(R.id.takeInWorkButton)
+	public void clickTakeInWork() {
+		mDbApplication.setType(1);
+		startActivity(InWorkApplicationActivity.newInstance(this).putExtra("id", id));
+	}
+
+
+	@OnClick(R.id.goToMainScreenButton)
+	public void openStartPage() {
+		startActivity(ApplicationsListActivity.newInstance(this));
+	}
+
+
+	@OnClick(R.id.sendSignalNavigationButton)
+	public void openSignals() {
+		startActivity(SendSignalPageActivity.newInstance(this));
+	}
+
+
+	@OnClick(R.id.goToMenuPageButton)
+	protected void openSettings() {
+		startActivity(new Intent(this, SettingsActivity.class));
+	}
+
 }

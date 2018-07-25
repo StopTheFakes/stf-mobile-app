@@ -2,13 +2,31 @@ package user.com.stopthefakes.ui.application.list;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.NoConnectionError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,8 +56,7 @@ public class ApplicationsListActivity extends BaseActivity implements Applicatio
 
 
 	public static Intent newInstance(Context context) {
-		Intent intent = new Intent(context, ApplicationsListActivity.class);
-		return intent;
+		return new Intent(context, ApplicationsListActivity.class);
 	}
 
 
@@ -52,6 +69,72 @@ public class ApplicationsListActivity extends BaseActivity implements Applicatio
 		initRecyclerView();
 		initAdapter();
 		dbApplicationList = App.getApp().getApplicationList();
+
+		RequestQueue queue = Volley.newRequestQueue(this);
+		StringRequest stringRequest = new StringRequest(Request.Method.GET, getString(R.string.api_base_url) + "request/taken",
+			new Response.Listener<String>() {
+				@Override
+				public void onResponse(String response) {
+					try {
+						JSONObject result = new JSONObject(response);
+						try {
+							JSONArray data = result.getJSONArray("data");
+							JSONObject item;
+							DbApplication app;
+							List<String> cities;
+							List<DbApplication> appList = new ArrayList<>();
+							for (int i = 0; i < data.length(); ++i) {
+								item = data.getJSONObject(i);
+								app = new DbApplication();
+								app.setId(Long.parseLong(item.getString("id")));
+								app.setShordDescription("short desc");
+								app.setHeader(item.getString("title"));
+								app.setPhotosQuantity(100L);
+								app.setVideosQuantity(103L);
+								cities = new ArrayList<>();
+								cities.add("New-York");
+								cities.add("Los-Angeles");
+								cities.add("Detroit");
+								cities.add("Portland");
+								app.setCitiesList(cities);
+								app.setCountry("USA");
+								app.setDescription("test desc");
+								app.setDate(item.getString("created"));
+								app.setType(0);
+								app.setAllType(0);
+								app.setImages(new int[]{R.drawable.icon1, R.drawable.icon1, R.drawable.icon1});
+								appList.add(app);
+							}
+							applicationsAdapter.addAll(appList);
+						} catch (JSONException e) {
+							Toast.makeText(getApplicationContext(), getString(R.string.api_err_server_err), Toast.LENGTH_LONG).show();
+						}
+					} catch (JSONException e) {
+						Toast.makeText(getApplicationContext(), getString(R.string.api_err_server_err), Toast.LENGTH_LONG).show();
+					}
+				}
+			},
+			new Response.ErrorListener() {
+				@Override
+				public void onErrorResponse(VolleyError error) {
+					if (error instanceof NoConnectionError) {
+						Toast.makeText(getApplicationContext(), getString(R.string.api_err_conn_lost), Toast.LENGTH_LONG).show();
+					} else {
+						Toast.makeText(getApplicationContext(), getString(R.string.api_err_server_err), Toast.LENGTH_LONG).show();
+					}
+				}
+			}
+		) {
+			@Override
+			public Map<String, String> getHeaders() {
+				Map<String, String> headers = new HashMap<>();
+				SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+				String token = sharedPref.getString("token", "");
+				headers.put("Authorization","Bearer " + token);
+				return headers;
+			}
+		};
+		queue.add(stringRequest);
 	}
 
 
