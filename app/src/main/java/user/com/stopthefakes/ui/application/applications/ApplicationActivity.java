@@ -4,11 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 
@@ -71,28 +72,30 @@ public class ApplicationActivity extends BaseActivity {
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		setContentView(R.layout.activity_application_details);
 		setUnbinder(ButterKnife.bind(this));
 
-		id = (int) getIntent().getExtras().get("id");
+		id = getIntent().getExtras().getInt("id");
+
 		mDbApplication = App.getApp().getApplicationList().get(id);
 
-		for (int i = 0; i < mDbApplication.getImages().length; i++) {
-			mImageContainer.addImage(mDbApplication.getImages()[i]);
+		for (int image : mDbApplication.getImages()) {
+			mImageContainer.addImage(image);
 		}
 
 		descriptionDetails.setText(mDbApplication.getShordDescription());
 		detailsHeader.setText(mDbApplication.getHeader());
 		countryTextView.setText(mDbApplication.getCountry());
 
-		photoInfoDetails.setText(mDbApplication.getAlerts()[0]);
+		photoInfoDetails.setText(mDbApplication.getAlert(0));
 		rightsInfoTextView.setText(mDbApplication.getRightToUser());
 		tipesInfoTextView.setText(mDbApplication.getTipes());
 
 		mImageContainer.setClickListener(new CustomImageContainer.IClickListener() {
 			@Override
 			public void onClick(int position) {
-				photoInfoDetails.setText(mDbApplication.getAlerts()[position]);
+				photoInfoDetails.setText(mDbApplication.getAlert(position));
 			}
 
 			@Override
@@ -100,25 +103,20 @@ public class ApplicationActivity extends BaseActivity {
 			}
 		});
 
-		String cities = mDbApplication.getCitiesList().get(0);
-		for (int i = 1; i < mDbApplication.getCitiesList().size(); i++) {
-			cities = cities + ", " + mDbApplication.getCitiesList().get(i);
-		}
-
-		citiesListTextView.setText(cities);
+		citiesListTextView.setText(TextUtils.join(", ", mDbApplication.getCitiesList()));
 
 		for (Value value : mDbApplication.getPhotoVideo()) {
 			if (value.type == 1) {
 				photosQuantityTextView.setVisibility(View.VISIBLE);
-				photosQuantityTextView.setText(value.value + " STF");
+				photosQuantityTextView.setText(getString(R.string.currency_label, value.value));
 			}
 			if (value.type == 2) {
 				videosQuantityTextView.setVisibility(View.VISIBLE);
-				videosQuantityTextView.setText(value.value + " STF");
+				videosQuantityTextView.setText(getString(R.string.currency_label, value.value));
 			}
 			if (value.type == 3) {
 				pictureQuantityTextView.setVisibility(View.VISIBLE);
-				pictureQuantityTextView.setText(value.value + " STF");
+				pictureQuantityTextView.setText(getString(R.string.currency_label, value.value));
 			}
 		}
 
@@ -132,12 +130,16 @@ public class ApplicationActivity extends BaseActivity {
 			container_for_checkbox.addView(checkBox);
 		}
 
-		if (mDbApplication.getCountry().equals("England")) {
-			countryImageView.setImageResource(R.drawable.en_flag);
-		} else if (mDbApplication.getCountry().equals("USA")) {
-			countryImageView.setImageResource(R.drawable.us_flag);
-		} else if (mDbApplication.getCountry().equals("Poland")) {
-			countryImageView.setImageResource(R.drawable.po_flag);
+		switch (mDbApplication.getCountry()) {
+			case "England":
+				countryImageView.setImageResource(R.drawable.en_flag);
+				break;
+			case "USA":
+				countryImageView.setImageResource(R.drawable.us_flag);
+				break;
+			case "Poland":
+				countryImageView.setImageResource(R.drawable.po_flag);
+				break;
 		}
 	}
 

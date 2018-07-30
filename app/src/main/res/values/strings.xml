@@ -30,6 +30,7 @@
 	<string name="right_to_use_title">Right to use</string>
 	<string name="tipes_title">Tipes</string>
 	<string name="send_signal_by_time">Give a signal at the end of time</string>
+	<string name="currency_label">%1$s STF</string>
 
 	<!--OffenderActivity-->
 	<string name="info_about_email_title">Если вам известен  E-mail правонарушителя, впишите его</string>

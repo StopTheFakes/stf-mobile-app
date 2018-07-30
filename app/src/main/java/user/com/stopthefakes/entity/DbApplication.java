@@ -1,29 +1,30 @@
 package user.com.stopthefakes.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class DbApplication {
 
-	private long id;
-	private String header;
-	private long photosQuantity;
-	private long videosQuantity;
-	private List<String> citiesList;
-	private String country;
-	private String description;
-	private String rightToUser;
-	private String tipes;
-	private String date;
-	private int type;
-	private int allType;
-	private String shordDescription;
-	private String[] alerts;
-	private int[] images;
-	private Value[] photoVideo;
-	private String topik;
-	private String searchOpject;
-	private String[] accepted;
+	private long id = 0;
+	private String header = "";
+	private long photosQuantity = 0;
+	private long videosQuantity = 0;
+	private List<String> citiesList = new ArrayList<>();
+	private String country = "";
+	private String description = "";
+	private String rightToUser = "";
+	private String tipes = "";
+	private String date = "";
+	private int type = 0;
+	private int allType = 0;
+	private String shordDescription = "";
+	private String[] alerts = new String[]{};
+	private int[] images = new int[]{};
+	private Value[] photoVideo = new Value[]{};
+	private String topik = "";
+	private String searchOpject = "";
+	private String[] accepted = new String[]{};
 
 
 	public String[] getAccepted() {
@@ -88,6 +89,11 @@ public class DbApplication {
 
 	public String[] getAlerts() {
 		return alerts;
+	}
+
+
+	public String getAlert(int pos) {
+		return alerts.length > pos ? alerts[pos] : "";
 	}
 
 

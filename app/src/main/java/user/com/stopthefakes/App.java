@@ -49,8 +49,10 @@ public class App extends Application {
 	private List<DbApplication> getHardcodedApplications() {
 		List<DbApplication> applicationList = new ArrayList<>();
 
-		DbApplication app = new DbApplication();
+		/*
+		DbApplication app;
 
+		app = new DbApplication();
 		app.setId(1L);
 		app.setShordDescription("Detect instances of unlawful and / or improper use of the brand name in New York City at service centers, used car dealerships, car washes and other business entities dealing with auto sales and car maintenance.");
 		app.setHeader("|| Automobile brand logo");
@@ -160,6 +162,7 @@ public class App extends Application {
 				return t1.getDate().compareTo(dbApplication.getDate());
 			}
 		});
+		// */
 
 		return applicationList;
 	}

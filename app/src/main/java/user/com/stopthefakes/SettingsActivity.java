@@ -68,21 +68,12 @@ public class SettingsActivity extends BaseActivity {
 			new Response.Listener<String>() {
 				@Override
 				public void onResponse(String response) {
-					Toast.makeText(getApplicationContext(), getString(R.string.api_mess_logout_finished), Toast.LENGTH_LONG).show();
-					SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-					SharedPreferences.Editor editor = sharedPref.edit();
-					editor.putString("token", "");
-					editor.apply();
-					toLoginActivity();
+					logout();
 				}
 			}, new Response.ErrorListener() {
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				if (error instanceof NoConnectionError) {
-					Toast.makeText(getApplicationContext(), getString(R.string.api_err_conn_lost), Toast.LENGTH_LONG).show();
-				} else {
-					Toast.makeText(getApplicationContext(), getString(R.string.api_err_server_err), Toast.LENGTH_LONG).show();
-				}
+				logout();
 			}
 		}) {
 			@Override
@@ -95,6 +86,16 @@ public class SettingsActivity extends BaseActivity {
 			}
 		};
 		queue.add(stringRequest);
+	}
+
+
+	protected void logout() {
+		Toast.makeText(getApplicationContext(), getString(R.string.api_mess_logout_finished), Toast.LENGTH_LONG).show();
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		SharedPreferences.Editor editor = sharedPref.edit();
+		editor.putString("token", "");
+		editor.apply();
+		startActivity(new Intent(this, AuthorizationActivity.class));
 	}
 
 
@@ -113,11 +114,6 @@ public class SettingsActivity extends BaseActivity {
 	@OnClick(R.id.goToMenuPageButton)
 	protected void openSettings() {
 		startActivity(new Intent(this, SettingsActivity.class));
-	}
-
-
-	protected void toLoginActivity() {
-		startActivity(new Intent(this, AuthorizationActivity.class));
 	}
 
 }

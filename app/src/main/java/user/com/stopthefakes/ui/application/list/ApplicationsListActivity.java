@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.NoConnectionError;
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -31,7 +32,9 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 import user.com.stopthefakes.App;
+import user.com.stopthefakes.AuthorizationActivity;
 import user.com.stopthefakes.BaseActivity;
 import user.com.stopthefakes.R;
 import user.com.stopthefakes.SettingsActivity;
@@ -119,6 +122,8 @@ public class ApplicationsListActivity extends BaseActivity implements Applicatio
 				public void onErrorResponse(VolleyError error) {
 					if (error instanceof NoConnectionError) {
 						Toast.makeText(getApplicationContext(), getString(R.string.api_err_conn_lost), Toast.LENGTH_LONG).show();
+					} else if (error instanceof AuthFailureError) {
+						logout();
 					} else {
 						Toast.makeText(getApplicationContext(), getString(R.string.api_err_server_err), Toast.LENGTH_LONG).show();
 					}
@@ -135,6 +140,15 @@ public class ApplicationsListActivity extends BaseActivity implements Applicatio
 			}
 		};
 		queue.add(stringRequest);
+	}
+
+
+	protected void logout() {
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		SharedPreferences.Editor editor = sharedPref.edit();
+		editor.putString("token", "");
+		editor.apply();
+		startActivity(new Intent(this, AuthorizationActivity.class));
 	}
 
 
