@@ -49,7 +49,7 @@ public class ApplicationsAdapter extends BaseRecyclerAdapter<DbApplication, Recy
 	@Override
 	public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		context = parent.getContext();
-		if (viewType == 1) {
+		if (DbApplication.isTypeTaken(viewType) || DbApplication.isTypeExpired(viewType)) {
 			return new InWorkApplicationViewHolder(LayoutInflater.from(context)
 				.inflate(R.layout.list_item_application_in_work, parent, false));
 		}
@@ -60,14 +60,12 @@ public class ApplicationsAdapter extends BaseRecyclerAdapter<DbApplication, Recy
 
 	@Override
 	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-		switch (getItem(position).getType()) {
-			case 0:
-				((ApplicationViewHolder) holder).bindView(getItem(position));
-				break;
+		DbApplication app = getItem(position);
 
-			case 1:
-				((InWorkApplicationViewHolder) holder).bindView(getItem(position));
-				break;
+		if (app.isWaiting()) {
+			((ApplicationViewHolder) holder).bindView(getItem(position));
+		} else if (app.isTaken() || app.isExpired()) {
+			((InWorkApplicationViewHolder) holder).bindView(getItem(position));
 		}
 	}
 
@@ -96,12 +94,12 @@ public class ApplicationsAdapter extends BaseRecyclerAdapter<DbApplication, Recy
 		}
 
 
-		void bindView(DbApplication dbApplication) {
-			inWorkApplicationItemCityCountryTextView.setText(String.format(context.getString(R.string.format_city_country),
-				dbApplication.getCountry(), getCitiesInString(dbApplication)));
-			inWorkApplicationItemDateTextView.setText(dbApplication.getDate());
-			inWorkTimerItemTextView.setText("24:45");
-			inWorkTitleItemTextView.setText(dbApplication.getHeader());
+		void bindView(DbApplication app) {
+			inWorkApplicationItemCityCountryTextView
+				.setText(String.format(context.getString(R.string.format_city_country), app.getCountry(), getCitiesInString(app)));
+			inWorkApplicationItemDateTextView.setText(app.getDate());
+			inWorkTimerItemTextView.setText(app.getTimeLeft());
+			inWorkTitleItemTextView.setText(app.getHeader());
 		}
 
 
@@ -165,9 +163,9 @@ public class ApplicationsAdapter extends BaseRecyclerAdapter<DbApplication, Recy
 			int pos = getAdapterPosition();
 			if (pos != RecyclerView.NO_POSITION && applicationActionListener != null) {
 				DbApplication dbApplication = getItem(pos);
-				dbApplication.setType(1);
+				//dbApplication.setType(1);
 				applicationActionListener.onTakingInWorkClicked(dbApplication);
-				notifyDataSetChanged();
+				//notifyDataSetChanged();
 			}
 		}
 	}

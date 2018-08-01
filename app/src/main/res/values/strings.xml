@@ -19,6 +19,9 @@
 	<string name="fake_string_description">Detect the occurrences of trade in women\'s handbags under "ХХХ" brand name outside the walls of the company stores in London.</string>
 	<string name="fake_string_item_header">Radiology X-Ray report has been updated</string>
 	<string name="fake_string_item_description">Computer users and programmers have become so accustomed to using Windows, even for the changing capabilities and the appearances of the graphical interface of the versions , therefore it has remained Microsoft\'s product.</string>
+	<string name="application_already_in_progress">Application already in progress</string>
+	<string name="application_expired">Application expired</string>
+	<string name="application_taken">Application taken</string>
 
 	<!--ActivityApplicationDetails-->
 	<string name="return_back_title">Back</string>

@@ -71,10 +71,15 @@ public class ApplicationsListActivity extends BaseActivity implements Applicatio
 
 		initRecyclerView();
 		initAdapter();
+		reloadList();
+	}
+
+
+	protected void reloadList() {
 		dbApplicationList = App.getApp().getApplicationList();
 
 		RequestQueue queue = Volley.newRequestQueue(this);
-		StringRequest stringRequest = new StringRequest(Request.Method.GET, getString(R.string.api_base_url) + "request/taken",
+		StringRequest stringRequest = new StringRequest(Request.Method.GET, getString(R.string.api_base_url) + "request",
 			new Response.Listener<String>() {
 				@Override
 				public void onResponse(String response) {
@@ -86,10 +91,14 @@ public class ApplicationsListActivity extends BaseActivity implements Applicatio
 							DbApplication app;
 							List<String> cities;
 							List<DbApplication> appList = new ArrayList<>();
+
+							int expires;
+							String created;
+
 							for (int i = 0; i < data.length(); ++i) {
 								item = data.getJSONObject(i);
 								app = new DbApplication();
-								app.setId(Long.parseLong(item.getString("id")));
+								app.setId(Long.parseLong(item.getString("claim_id")));
 								app.setShordDescription("short desc");
 								app.setHeader(item.getString("title"));
 								app.setPhotosQuantity(100L);
@@ -102,13 +111,33 @@ public class ApplicationsListActivity extends BaseActivity implements Applicatio
 								app.setCitiesList(cities);
 								app.setCountry("USA");
 								app.setDescription("test desc");
-								app.setDate(item.getString("created"));
-								app.setType(0);
-								app.setAllType(0);
+
+								try {
+									created = item.getString("created");
+								} catch (Exception e) {
+									created = "----/--/--";
+								}
+								app.setDate(created);
+
+								try {
+									expires = item.getInt("expires");
+									app.setExpires(expires);
+									if (expires > 0) {
+										app.setIsTaken();
+										app.setAllIsTaken();
+									} else {
+										app.setIsExpired();
+										app.setAllIsExpired();
+									}
+								} catch (Exception e) {
+									app.setIsWaiting();
+									app.setAllIsWaiting();
+								}
+
 								app.setImages(new int[]{R.drawable.icon1, R.drawable.icon1, R.drawable.icon1});
 								appList.add(app);
 							}
-							applicationsAdapter.addAll(appList);
+							applicationsAdapter.replaceAll(appList);
 						} catch (JSONException e) {
 							Toast.makeText(getApplicationContext(), getString(R.string.api_err_server_err), Toast.LENGTH_LONG).show();
 						}
@@ -195,8 +224,12 @@ public class ApplicationsListActivity extends BaseActivity implements Applicatio
 
 
 	@Override
-	public void onSendSignalClicked(DbApplication dbApplication) {
-		int id = dbApplication.getId().intValue();
+	public void onSendSignalClicked(DbApplication app) {
+		if (app.isExpired()) {
+			Toast.makeText(getApplicationContext(), getString(R.string.application_expired), Toast.LENGTH_LONG).show();
+			return;
+		}
+		int id = app.getId().intValue();
 		Intent intent = new Intent(this, GalleryMainActivity.class);
 		intent.putExtra("id", id);
 		startActivity(intent);
@@ -204,17 +237,59 @@ public class ApplicationsListActivity extends BaseActivity implements Applicatio
 
 
 	@Override
-	public void onApplicationClicked(DbApplication dbApplication, int pos) {
-		if (dbApplication.getType() == 1) {
-			startActivity(InWorkApplicationActivity.newInstance(this).putExtra("id", pos));
-		} else {
+	public void onApplicationClicked(DbApplication app, int pos) {
+		if (app.isWaiting()) {
 			startActivity(ApplicationActivity.newInstance(this).putExtra("id", pos));
+		} else {
+			startActivity(InWorkApplicationActivity.newInstance(this).putExtra("id", pos));
 		}
 	}
 
 
 	@Override
-	public void onTakingInWorkClicked(DbApplication dbApplication) { }
+	public void onTakingInWorkClicked(DbApplication app) {
+		if (app.isTaken()) {
+			Toast.makeText(getApplicationContext(), getString(R.string.application_already_in_progress), Toast.LENGTH_LONG).show();
+			return;
+		}
+		if (app.isExpired()) {
+			Toast.makeText(getApplicationContext(), getString(R.string.application_expired), Toast.LENGTH_LONG).show();
+			return;
+		}
+		RequestQueue queue = Volley.newRequestQueue(this);
+		String url = getString(R.string.api_base_url) + "request/" + String.valueOf(app.getId()) + "/take";
+		StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+			new Response.Listener<String>() {
+				@Override
+				public void onResponse(String response) {
+					Toast.makeText(getApplicationContext(), getString(R.string.application_taken), Toast.LENGTH_LONG).show();
+					reloadList();
+				}
+			},
+			new Response.ErrorListener() {
+				@Override
+				public void onErrorResponse(VolleyError error) {
+					if (error instanceof NoConnectionError) {
+						Toast.makeText(getApplicationContext(), getString(R.string.api_err_conn_lost), Toast.LENGTH_LONG).show();
+					} else if (error instanceof AuthFailureError) {
+						logout();
+					} else {
+						Toast.makeText(getApplicationContext(), getString(R.string.api_err_server_err), Toast.LENGTH_LONG).show();
+					}
+				}
+			}
+		) {
+			@Override
+			public Map<String, String> getHeaders() {
+				Map<String, String> headers = new HashMap<>();
+				SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+				String token = sharedPref.getString("token", "");
+				headers.put("Authorization","Bearer " + token);
+				return headers;
+			}
+		};
+		queue.add(stringRequest);
+	}
 
 
 	@OnClick(R.id.goToMainScreenButton)

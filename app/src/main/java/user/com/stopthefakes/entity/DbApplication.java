@@ -18,6 +18,7 @@ public class DbApplication {
 	private String date = "";
 	private int type = 0;
 	private int allType = 0;
+	private int expires = 0;
 	private String shordDescription = "";
 	private String[] alerts = new String[]{};
 	private int[] images = new int[]{};
@@ -182,8 +183,86 @@ public class DbApplication {
 	}
 
 
+	public void setExpires(int expires) {
+		this.expires = expires;
+	}
+
+
 	public int getType() {
 		return type;
+	}
+
+
+	public void setIsWaiting() {
+		type = 0;
+	}
+
+
+	public void setIsTaken() {
+		type = 1;
+	}
+
+
+	public void setIsExpired() {
+		type = 2;
+	}
+
+
+	public void setAllIsWaiting() {
+		allType = 0;
+	}
+
+
+	public void setAllIsTaken() {
+		allType = 1;
+	}
+
+
+	public void setAllIsExpired() {
+		allType = 2;
+	}
+
+
+	public boolean isWaiting() {
+		return type == 0;
+	}
+
+
+	public boolean isTaken() {
+		return type == 1;
+	}
+
+
+	public boolean isExpired() {
+		return type == 2;
+	}
+
+
+	public static boolean isTypeWaiting(int type) {
+		return type == 0;
+	}
+
+
+	public static boolean isTypeTaken(int type) {
+		return type == 1;
+	}
+
+
+	public static boolean isTypeExpired(int type) {
+		return type == 2;
+	}
+
+
+	public String getTimeLeft() {
+		if (isExpired()) {
+			return "00:00";
+		}
+		if (isTaken()) {
+			int hours = expires / 60 / 60;
+			int minutes = (expires - hours * 60 * 60) / 60;
+			return hours + ":" + minutes;
+		}
+		return null;
 	}
 
 
