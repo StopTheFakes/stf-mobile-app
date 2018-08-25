@@ -1,192 +1,197 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
-    tools:context=".ui.gallery.GalleryMainActivity">
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/white"
+	android:orientation="vertical"
+	tools:context=".ui.gallery.GalleryMainActivity">
 
+	<RelativeLayout
+		android:id="@+id/cameraPreview"
+		android:layout_width="360dp"
+		android:layout_height="600dp"
+		android:layout_margin="@dimen/activity_horizontal_margin"
+		android:background="@drawable/rounded_edit_text">
 
-    <RelativeLayout
-        android:id="@+id/cameraPreview"
-        android:layout_width="360dp"
-        android:layout_height="600dp"
-        android:layout_margin="@dimen/activity_horizontal_margin"
-        android:background="@drawable/rounded_edit_text">
+		<RelativeLayout
+			android:id="@+id/surfaceContainer"
+			android:layout_width="360dp"
+			android:layout_height="600dp"
+			android:layout_centerInParent="true"
+			tools:ignore="UselessParent">
 
-        <RelativeLayout
-            android:id="@+id/surfaceContainer"
-            android:layout_width="360dp"
-            android:layout_height="600dp"
-            android:layout_centerInParent="true">
+			<user.com.stopthefakes.ui.gallery.CustomSurfaceView
+				android:id="@+id/surfaceView"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" />
 
-            <user.com.stopthefakes.ui.gallery.CustomSurfaceView
-                android:id="@+id/surfaceView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </RelativeLayout>
+		</RelativeLayout>
 
-    </RelativeLayout>
+	</RelativeLayout>
 
-    <TextView
-        android:id="@+id/photosCountTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/container_send_signal_bottom"
-        android:layout_gravity="bottom"
-        android:layout_marginEnd="@dimen/default_size"
-        android:layout_marginStart="24dp"
-        android:background="@color/transparent"
-        android:text="photo 0/5"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_large" />
+	<TextView
+		android:id="@+id/photosCountTextView"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_above="@+id/container_send_signal_bottom"
+		android:layout_gravity="bottom"
+		android:layout_marginEnd="@dimen/default_size"
+		android:layout_marginStart="24dp"
+		android:background="@color/transparent"
+		android:text="photo 0/5"
+		android:textAlignment="center"
+		android:textColor="@color/white"
+		android:textSize="@dimen/text_size_large" />
 
-    <TextView
-        android:id="@+id/video_timer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/container_send_signal_bottom"
-        android:layout_marginEnd="@dimen/default_size"
-        android:layout_marginStart="@dimen/default_size"
-        android:background="@color/black"
-        android:drawablePadding="@dimen/half_default_size"
-        android:drawableStart="@drawable/rec"
-        android:gravity="start"
-        android:paddingStart="@dimen/half_default_size"
-        android:text="REC 00:00"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_large" />
+	<TextView
+		android:id="@+id/video_timer"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_above="@+id/container_send_signal_bottom"
+		android:layout_marginEnd="@dimen/default_size"
+		android:layout_marginStart="@dimen/default_size"
+		android:background="@color/black"
+		android:drawablePadding="@dimen/half_default_size"
+		android:drawableStart="@drawable/rec"
+		android:gravity="start"
+		android:paddingStart="@dimen/half_default_size"
+		android:text="REC 00:00"
+		android:textColor="@color/white"
+		android:textSize="@dimen/text_size_large"
+		tools:ignore="RtlSymmetry" />
 
-    <RelativeLayout
-        android:id="@+id/imageContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/container_send_signal_bottom"
-        android:layout_below="@+id/horizontalScrollview"
-        android:layout_centerInParent="true"
-        android:background="@color/white"
-        android:paddingEnd="@dimen/default_size"
-        android:paddingStart="@dimen/default_size"
-        android:visibility="gone">
+	<RelativeLayout
+		android:id="@+id/imageContainer"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_above="@+id/container_send_signal_bottom"
+		android:layout_below="@+id/horizontalScrollview"
+		android:layout_centerInParent="true"
+		android:background="@color/white"
+		android:paddingEnd="@dimen/default_size"
+		android:paddingStart="@dimen/default_size"
+		android:visibility="gone">
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/mainImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/rounded_image"
-            android:scaleType="centerCrop"
-            app:riv_corner_radius="10dp" />
+		<com.makeramen.roundedimageview.RoundedImageView
+			android:id="@+id/mainImage"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_gravity="center_horizontal"
+			android:background="@drawable/rounded_image"
+			android:scaleType="centerCrop"
+			app:riv_corner_radius="10dp" />
 
+		<ImageButton
+			android:id="@+id/deleteItemButton"
+			android:layout_width="50dp"
+			android:layout_height="50dp"
+			android:layout_alignParentBottom="true"
+			android:layout_alignParentEnd="true"
+			android:layout_gravity="end|bottom"
+			android:layout_margin="16dp"
+			android:background="@drawable/rounded_delete_item_button"
+			android:src="@drawable/ic_trash_can_white"
+			android:contentDescription="@string/delete_item_button" />
 
-        <ImageButton
-            android:id="@+id/deleteItemButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="16dp"
-            android:background="@drawable/rounded_delete_item_button"
-            android:src="@drawable/ic_trash_can_white" />
-    </RelativeLayout>
+	</RelativeLayout>
 
+	<HorizontalScrollView
+		android:id="@+id/horizontalScrollview"
+		android:layout_width="match_parent"
+		android:layout_height="88dp"
+		android:layout_alignParentTop="true"
+		android:layout_centerHorizontal="true"
+		android:layout_marginTop="8dp"
+		android:background="@color/white"
+		android:paddingBottom="@dimen/half_default_size"
+		android:paddingStart="@dimen/half_default_size"
+		android:scrollbars="none"
+		tools:ignore="RtlSymmetry">
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollview"
-        android:layout_width="match_parent"
-        android:layout_height="88dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:background="@color/white"
-        android:paddingBottom="@dimen/half_default_size"
-        android:paddingStart="@dimen/half_default_size"
-        android:scrollbars="none">
+		<RelativeLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+			<user.com.stopthefakes.ui.gallery.CustomImageContainer
+				android:id="@+id/imagesLayout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+			</user.com.stopthefakes.ui.gallery.CustomImageContainer>
 
-            <user.com.stopthefakes.ui.gallery.CustomImageContainer
-                android:id="@+id/imagesLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+		</RelativeLayout>
+	</HorizontalScrollView>
 
-            </user.com.stopthefakes.ui.gallery.CustomImageContainer>
+	<LinearLayout
+		android:id="@+id/container_send_signal_bottom"
+		android:layout_width="match_parent"
+		android:layout_height="80dp"
+		android:layout_above="@+id/bottomLayout"
+		android:background="@color/white"
+		android:paddingBottom="@dimen/half_default_size"
+		android:paddingTop="@dimen/half_default_size">
 
-        </RelativeLayout>
-    </HorizontalScrollView>
+		<Button
+			android:id="@+id/sendSignalButton"
+			android:layout_width="match_parent"
+			android:layout_height="64dp"
+			android:layout_marginEnd="@dimen/activity_horizontal_margin"
+			android:layout_marginStart="@dimen/activity_horizontal_margin"
+			android:background="@drawable/button_send_signal"
+			android:enabled="false"
+			android:text="@string/send_signal_button"
+			android:textAllCaps="false"
+			android:textColor="@color/button"
+			android:textSize="@dimen/text_size_extra_large_20" />
 
-    <LinearLayout
-        android:id="@+id/container_send_signal_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_above="@+id/bottomLayout"
-        android:background="@color/white"
-        android:paddingBottom="@dimen/half_default_size"
-        android:paddingTop="@dimen/half_default_size">
+	</LinearLayout>
 
-        <Button
-            android:id="@+id/sendSignalButton"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:background="@drawable/button_send_signal"
-            android:enabled="false"
-            android:text="@string/send_signal_button"
-            android:textAllCaps="false"
-            android:textColor="@color/button"
-            android:textSize="@dimen/text_size_extra_large_20" />
+	<LinearLayout
+		android:id="@+id/bottomLayout"
+		android:layout_width="match_parent"
+		android:layout_height="100dp"
+		android:layout_alignParentBottom="true"
+		android:background="@color/application_inactive"
+		android:orientation="horizontal"
+		android:paddingBottom="16dp"
+		android:paddingTop="16dp">
 
-    </LinearLayout>
+		<TextView
+			android:id="@+id/returnBackTitle"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_marginStart="@dimen/activity_horizontal_margin"
+			android:layout_weight="1"
+			android:gravity="center"
+			android:textSize="@dimen/text_size_very_large_18"
+			android:text="@string/return_back_title" />
 
-    <LinearLayout
-        android:id="@+id/bottomLayout"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/application_inactive"
-        android:orientation="horizontal"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp">
+		<ImageButton
+			android:id="@+id/makePhotoButton"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_marginBottom="8dp"
+			android:layout_marginStart="@dimen/activity_horizontal_margin"
+			android:layout_marginTop="8dp"
+			android:layout_weight="1"
+			android:background="@drawable/rounded_button_white"
+			android:src="@drawable/ic_photo_camera"
+			android:contentDescription="@string/make_photo_button" />
 
-        <TextView
-            android:id="@+id/returnBackTitle"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="@dimen/text_size_very_large_18"
-            android:text="Back" />
+		<ImageButton
+			android:id="@+id/makeVideoButton"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_marginBottom="8dp"
+			android:layout_marginEnd="@dimen/activity_horizontal_margin"
+			android:layout_marginStart="@dimen/activity_horizontal_margin"
+			android:layout_marginTop="8dp"
+			android:layout_weight="1"
+			android:background="@drawable/rounded_button_white"
+			android:src="@drawable/ic_antique_cinema_camera"
+			android:contentDescription="@string/make_video_button" />
 
-        <ImageButton
-            android:id="@+id/makePhotoButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_button_white"
-            android:src="@drawable/ic_photo_camera" />
-
-        <ImageButton
-            android:id="@+id/makeVideoButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_button_white"
-            android:src="@drawable/ic_antique_cinema_camera" />
-
-    </LinearLayout>
+	</LinearLayout>
 </RelativeLayout>

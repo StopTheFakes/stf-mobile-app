@@ -88,6 +88,7 @@
 	<string name="funds_available">Funds Available:</string>
 	<string name="total_amount">Total amount</string>
 	<string name="declined">Declined</string>
+	<string name="expired">Expired</string>
 
 	<!--API-->
 	<string name="api_base_url">http://stf.glissmedia.ru/api/v1/</string>
@@ -95,4 +96,11 @@
 	<string name="api_err_incorrect_cred">Incorrect email or password</string>
 	<string name="api_err_server_err">Server error</string>
 	<string name="api_mess_logout_finished">Logout finished</string>
+	<string name="go_to_main_screen_button">Go to main screen button</string>
+	<string name="send_signal_navigation_button">Send signal navigation button</string>
+	<string name="go_to_menu_page_button">Go to menu page button</string>
+	<string name="delete_item_button">Delete item button</string>
+	<string name="make_photo_button">Make photo button</string>
+	<string name="make_video_button">Make video button</string>
+	<string name="file_photo_label">photo %1$s/%2$s</string>
 </resources>

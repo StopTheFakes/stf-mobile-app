@@ -83,8 +83,7 @@
 					android:background="@color/white"
 					android:textColor="@color/black"
 					android:textSize="@dimen/text_size_extra_large_20"
-					android:textStyle="bold"
-					tools:text="@string/fake_string_item_header" />
+					android:textStyle="bold" />
 
 				<TextView
 					android:id="@+id/descriptionItemTextView"
@@ -97,7 +96,6 @@
 					android:background="@color/white"
 					android:paddingStart="@dimen/activity_horizontal_margin"
 					android:paddingEnd="@dimen/activity_horizontal_margin"
-					android:text="@string/fake_string_description"
 					android:textColor="@color/textColorSecondary"
 					android:textStyle="bold" />
 

@@ -30,10 +30,16 @@
 			</intent-filter>
 		</activity>
 
-		<activity android:name="user.com.stopthefakes.ui.application.list.ApplicationsListActivity"
+		<activity
+			android:name="user.com.stopthefakes.ui.application.list.ApplicationsListActivity"
 			android:screenOrientation="portrait" />
 
-		<activity android:name="user.com.stopthefakes.ui.application.applications.InWorkApplicationActivity"
+		<activity
+			android:name="user.com.stopthefakes.ui.application.applications.InWorkApplicationActivity"
+			android:screenOrientation="portrait" />
+
+		<activity
+			android:name="user.com.stopthefakes.ui.application.applications.ExpiredApplicationActivity"
 			android:screenOrientation="portrait" />
 
 		<activity android:name="user.com.stopthefakes.ui.application.applications.ApplicationActivity"

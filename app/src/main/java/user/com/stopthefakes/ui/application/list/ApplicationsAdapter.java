@@ -49,9 +49,13 @@ public class ApplicationsAdapter extends BaseRecyclerAdapter<DbApplication, Recy
 	@Override
 	public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		context = parent.getContext();
-		if (DbApplication.isTypeTaken(viewType) || DbApplication.isTypeExpired(viewType)) {
+		if (DbApplication.isTypeTaken(viewType)) {
 			return new InWorkApplicationViewHolder(LayoutInflater.from(context)
 				.inflate(R.layout.list_item_application_in_work, parent, false));
+		}
+		if (DbApplication.isTypeExpired(viewType)) {
+			return new ExpiredApplicationViewHolder(LayoutInflater.from(context)
+				.inflate(R.layout.list_item_application_expired, parent, false));
 		}
 		return new ApplicationViewHolder(LayoutInflater.from(context)
 			.inflate(R.layout.list_item_application, parent, false));
@@ -64,8 +68,10 @@ public class ApplicationsAdapter extends BaseRecyclerAdapter<DbApplication, Recy
 
 		if (app.isWaiting()) {
 			((ApplicationViewHolder) holder).bindView(getItem(position));
-		} else if (app.isTaken() || app.isExpired()) {
+		} else if (app.isTaken()) {
 			((InWorkApplicationViewHolder) holder).bindView(getItem(position));
+		} else if (app.isExpired()) {
+			((ExpiredApplicationViewHolder) holder).bindView(getItem(position));
 		}
 	}
 
@@ -122,6 +128,39 @@ public class ApplicationsAdapter extends BaseRecyclerAdapter<DbApplication, Recy
 	}
 
 
+	public class ExpiredApplicationViewHolder extends RecyclerView.ViewHolder {
+
+		@BindView(R.id.cityCountryTextView)
+		TextView cityCountryTextView;
+		@BindView(R.id.dateTextView)
+		TextView dateTextView;
+		@BindView(R.id.titleTextView)
+		TextView titleTextView;
+
+
+		ExpiredApplicationViewHolder(View itemView) {
+			super(itemView);
+			ButterKnife.bind(this, itemView);
+		}
+
+
+		void bindView(DbApplication app) {
+			cityCountryTextView.setText(String.format(context.getString(R.string.format_city_country), app.getCountry(), getCitiesInString(app)));
+			dateTextView.setText(app.getDate());
+			titleTextView.setText(app.getHeader());
+		}
+
+
+		@OnClick(R.id.viewApplicationButton)
+		public void showWorkingDetails() {
+			int pos = getAdapterPosition();
+			if (pos != RecyclerView.NO_POSITION && applicationActionListener != null) {
+				applicationActionListener.onApplicationClicked(items.get(pos), pos);
+			}
+		}
+	}
+
+
 	public class ApplicationViewHolder extends RecyclerView.ViewHolder {
 
 		@BindView(R.id.applicationItemCityTextView)
@@ -163,22 +202,21 @@ public class ApplicationsAdapter extends BaseRecyclerAdapter<DbApplication, Recy
 			int pos = getAdapterPosition();
 			if (pos != RecyclerView.NO_POSITION && applicationActionListener != null) {
 				DbApplication dbApplication = getItem(pos);
-				//dbApplication.setType(1);
 				applicationActionListener.onTakingInWorkClicked(dbApplication);
-				//notifyDataSetChanged();
 			}
 		}
 	}
 
 
 	private String getCitiesInString(DbApplication dbApplication) {
-		String s;
-		if(dbApplication.getCitiesList().size() > 1){
-			s = dbApplication.getCitiesList().size() + " cities";
-		} else {
-			s = dbApplication.getCitiesList().get(0);
+		Integer size = dbApplication.getCitiesList().size();
+		if (size == 0) {
+			return "";
 		}
-		return s;
+		if (size == 1) {
+			return dbApplication.getCitiesList().get(0);
+		}
+		return size + " cities";
 	}
 
 

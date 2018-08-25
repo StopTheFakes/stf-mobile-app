@@ -1,24 +1,13 @@
 package user.com.stopthefakes;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.widget.Toast;
 
-import com.android.volley.NoConnectionError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.json.JSONObject;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import user.com.stopthefakes.api.Request;
 import user.com.stopthefakes.ui.application.all.AllSignalsActivity;
 import user.com.stopthefakes.ui.application.list.ApplicationsListActivity;
 import user.com.stopthefakes.ui.application.signal.SendSignalPageActivity;
@@ -62,40 +51,25 @@ public class SettingsActivity extends BaseActivity {
 
 	@OnClick(R.id.exit)
 	protected void onClickExit() {
-		RequestQueue queue = Volley.newRequestQueue(this);
-
-		StringRequest stringRequest = new StringRequest(Request.Method.POST, getString(R.string.api_base_url) + "logout",
-			new Response.Listener<String>() {
-				@Override
-				public void onResponse(String response) {
-					logout();
-				}
-			}, new Response.ErrorListener() {
+		Request req = new Request("logout", Request.Method.POST) {
 			@Override
-			public void onErrorResponse(VolleyError error) {
+			public void onSuccess(JSONObject result) {
 				logout();
 			}
-		}) {
+
 			@Override
-			public Map<String, String> getHeaders() {
-				Map<String, String> headers = new HashMap<>();
-				SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-				String token = sharedPref.getString("token", "");
-				headers.put("Authorization","Bearer " + token);
-				return headers;
+			public void onError(Exception e) {
+				super.onError(e);
+				logout();
+			}
+
+			@Override
+			public void onConnectionError(Exception e) {
+				super.onConnectionError(e);
+				logout();
 			}
 		};
-		queue.add(stringRequest);
-	}
-
-
-	protected void logout() {
-		Toast.makeText(getApplicationContext(), getString(R.string.api_mess_logout_finished), Toast.LENGTH_LONG).show();
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-		SharedPreferences.Editor editor = sharedPref.edit();
-		editor.putString("token", "");
-		editor.apply();
-		startActivity(new Intent(this, AuthorizationActivity.class));
+		req.process(App.getApp());
 	}
 
 
@@ -114,6 +88,12 @@ public class SettingsActivity extends BaseActivity {
 	@OnClick(R.id.goToMenuPageButton)
 	protected void openSettings() {
 		startActivity(new Intent(this, SettingsActivity.class));
+	}
+
+
+	protected void logout() {
+		App.getApp().logout();
+		startActivity(new Intent(this, AuthorizationActivity.class));
 	}
 
 }

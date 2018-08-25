@@ -1,189 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+	<android.support.v4.widget.NestedScrollView
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		style="@style/scrollbar_style"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@drawable/main_background"
+		android:fadeScrollbars="false"
+		android:paddingEnd="4dp"
+		android:scrollbars="vertical"
+		android:layout_above="@+id/bottomNavigation"
+		android:verticalScrollbarPosition="right"
+		tools:ignore="RtlSymmetry">
 
-    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        style="@style/scrollbar_style"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/main_background"
-        android:fadeScrollbars="false"
-        android:paddingEnd="4dp"
-        android:scrollbars="vertical"
-        android:layout_above="@+id/bottomNavigation"
-        android:verticalScrollbarPosition="right">
+		<android.support.constraint.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="@dimen/activity_vertical_margin"
+			android:layout_marginBottom="16dp"
+			android:paddingBottom="32dp">
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_vertical_margin"
-            android:layout_marginBottom="16dp"
-            android:paddingBottom="32dp">
+			<TextView
+				android:id="@+id/returnBackTextView"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:background="@drawable/rounded_text_view_top"
+				android:drawablePadding="8dp"
+				android:drawableStart="@drawable/ic_back_arrow_gray"
+				android:gravity="center_vertical"
+				android:paddingBottom="4dp"
+				android:paddingStart="8dp"
+				android:paddingTop="4dp"
+				android:text="@string/return_back_title"
+				android:textSize="@dimen/text_size_large"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/returnBackTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_text_view_top"
-                android:drawablePadding="8dp"
-                android:drawableStart="@drawable/ic_back_arrow_gray"
-                android:gravity="center_vertical"
-                android:paddingBottom="4dp"
-                android:paddingStart="8dp"
-                android:paddingTop="4dp"
-                android:text="@string/return_back_title"
-                android:textSize="@dimen/text_size_large"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+			<TextView
+				android:id="@+id/detailsHeader"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:background="@color/white"
+				android:ellipsize="end"
+				android:lines="1"
+				android:paddingEnd="48dp"
+				android:paddingStart="@dimen/default_size"
+				android:paddingTop="@dimen/activity_vertical_margin"
+				android:textColor="@color/black"
+				android:textSize="@dimen/text_size_large"
+				android:textStyle="bold"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/returnBackTextView" />
 
-            <TextView
-                android:id="@+id/detailsHeader"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:ellipsize="end"
-                android:lines="1"
-                android:paddingEnd="48dp"
-                android:paddingStart="@dimen/default_size"
-                android:paddingTop="@dimen/activity_vertical_margin"
-                android:text="@string/fake_string_item_header"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_large"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/returnBackTextView" />
+			<android.support.constraint.ConstraintLayout
+				android:id="@+id/container"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:background="@color/white"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/detailsHeader">
 
+				<View
+					android:id="@+id/divider"
+					android:layout_width="0dp"
+					android:layout_height="1dp"
+					android:layout_marginEnd="@dimen/default_size"
+					android:layout_marginStart="@dimen/default_size"
+					android:layout_marginTop="8dp"
+					android:background="@color/application_inactive"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toTopOf="parent" />
 
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/container"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detailsHeader">
+				<LinearLayout
+					android:id="@+id/container_photo"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:layout_marginStart="@dimen/default_size"
+					android:layout_marginTop="@dimen/activity_vertical_margin"
+					app:layout_constraintHorizontal_weight="2"
+					app:layout_constraintTop_toBottomOf="@+id/divider">
 
-                <View
-                    android:id="@+id/divider"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginEnd="@dimen/default_size"
-                    android:layout_marginStart="@dimen/default_size"
-                    android:layout_marginTop="8dp"
-                    android:background="@color/application_inactive"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+					<TextView
+						android:id="@+id/photosQuantityTextView"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:background="@color/white"
+						android:drawablePadding="8dp"
+						android:drawableStart="@drawable/ic_photo_camera"
+						android:gravity="center_vertical"
+						android:text="100.00 STF"
+						android:textSize="@dimen/text_size_large"
+						android:layout_weight="1"
+						android:visibility="gone" />
 
-                <LinearLayout
-                    android:id="@+id/container_photo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginStart="@dimen/default_size"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
-                    app:layout_constraintHorizontal_weight="2"
-                    app:layout_constraintTop_toBottomOf="@+id/divider">
+					<TextView
+						android:id="@+id/videosQuantityTextView"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="@dimen/default_size"
+						android:background="@color/white"
+						android:drawablePadding="8dp"
+						android:drawableStart="@drawable/ic_antique_cinema_camera"
+						android:gravity="center_vertical"
+						android:text="100.00 STF"
+						android:textSize="@dimen/text_size_large"
+						app:layout_constraintBaseline_toBaselineOf="@+id/photosQuantityTextView"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintHorizontal_weight="2"
+						app:layout_constraintTop_toBottomOf="@+id/divider"
+						android:layout_weight="1"
+						android:visibility="gone" />
 
-                    <TextView
-                        android:id="@+id/photosQuantityTextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:drawablePadding="8dp"
-                        android:drawableStart="@drawable/ic_photo_camera"
-                        android:gravity="center_vertical"
-                        android:text="100.00 STF"
-                        android:textSize="@dimen/text_size_large"
-                        android:layout_weight="1"
-                        android:visibility="gone"/>
+					<TextView
+						android:id="@+id/pictureQuantityTextView"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="@dimen/default_size"
+						android:background="@color/white"
+						android:drawablePadding="8dp"
+						android:drawableStart="@drawable/ic_insert_picture_icon"
+						android:gravity="center_vertical"
+						android:text="100.00 STF"
+						android:textSize="@dimen/text_size_large"
+						app:layout_constraintBaseline_toBaselineOf="@+id/photosQuantityTextView"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintHorizontal_weight="2"
+						app:layout_constraintTop_toBottomOf="@+id/divider"
+						android:layout_weight="1"
+						android:visibility="gone" />
 
-                    <TextView
-                        android:id="@+id/videosQuantityTextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/default_size"
-                        android:background="@color/white"
-                        android:drawablePadding="8dp"
-                        android:drawableStart="@drawable/ic_antique_cinema_camera"
-                        android:gravity="center_vertical"
-                        android:text="100.00 STF"
-                        android:textSize="@dimen/text_size_large"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/photosQuantityTextView"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_weight="2"
-                        app:layout_constraintTop_toBottomOf="@+id/divider"
-                        android:layout_weight="1"
-                        android:visibility="gone"/>
+				</LinearLayout>
 
-                    <TextView
-                        android:id="@+id/pictureQuantityTextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/default_size"
-                        android:background="@color/white"
-                        android:drawablePadding="8dp"
-                        android:drawableStart="@drawable/ic_insert_picture_icon"
-                        android:gravity="center_vertical"
-                        android:text="100.00 STF"
-                        android:textSize="@dimen/text_size_large"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/photosQuantityTextView"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_weight="2"
-                        app:layout_constraintTop_toBottomOf="@+id/divider"
-                        android:layout_weight="1"
-                        android:visibility="gone"/>
-                </LinearLayout>
+			</android.support.constraint.ConstraintLayout>
 
-            </android.support.constraint.ConstraintLayout>
+			<include
+				android:id="@+id/contentLayout"
+				layout="@layout/content_details_layout"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/container" />
 
-            <include
-                android:id="@+id/contentLayout"
-                layout="@layout/content_details_layout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/container" />
+			<RelativeLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:background="@drawable/rounded_bottom_white"
+				android:paddingBottom="@dimen/half_default_size"
+				android:paddingTop="8dp"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/contentLayout">
 
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_bottom_white"
-                android:paddingBottom="@dimen/half_default_size"
-                android:paddingTop="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/contentLayout">
+				<Button
+					android:id="@+id/takeInWorkButton"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/activity_horizontal_margin"
+					android:layout_marginStart="@dimen/activity_horizontal_margin"
+					android:background="@drawable/rounded_take_in_work_button"
+					android:text="@string/take_in_work_button"
+					android:textAllCaps="false"
+					android:textColor="@color/textWhiteColorPrimary" />
 
-                <Button
-                    android:id="@+id/takeInWorkButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:background="@drawable/rounded_take_in_work_button"
-                    android:text="@string/take_in_work_button"
-                    android:textAllCaps="false"
-                    android:textColor="@color/textWhiteColorPrimary" />
+			</RelativeLayout>
 
-            </RelativeLayout>
+		</android.support.constraint.ConstraintLayout>
 
-        </android.support.constraint.ConstraintLayout>
+	</android.support.v4.widget.NestedScrollView>
 
-    </android.support.v4.widget.NestedScrollView>
-
-    <include
-        android:id="@+id/bottomNavigation"
-        layout="@layout/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true" />
+	<include
+		android:id="@+id/bottomNavigation"
+		layout="@layout/bottom_navigation"
+		android:layout_width="match_parent"
+		android:layout_height="60dp"
+		android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

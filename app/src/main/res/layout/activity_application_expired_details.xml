@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<android.support.v4.widget.NestedScrollView
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		style="@style/scrollbar_style"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_above="@+id/bottomNavigation"
+		android:background="@drawable/main_background"
+		android:fadeScrollbars="false"
+		android:paddingEnd="4dp"
+		android:scrollbars="vertical"
+		android:verticalScrollbarPosition="right"
+		tools:ignore="RtlSymmetry">
+
+		<android.support.constraint.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="@dimen/activity_vertical_margin"
+			android:background="@color/transparent"
+			android:paddingBottom="32dp">
+
+			<TextView
+				android:id="@+id/returnBackTextView"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="16dp"
+				android:background="@drawable/rounded_text_view_top_expired"
+				android:drawablePadding="8dp"
+				android:drawableStart="@drawable/ic_back_arrow_white"
+				android:gravity="center_vertical"
+				android:paddingBottom="4dp"
+				android:paddingStart="8dp"
+				android:paddingTop="4dp"
+				android:text="@string/return_back_title"
+				android:textColor="@color/white"
+				android:textSize="@dimen/text_size_large"
+				app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent" />
+
+			<android.support.constraint.ConstraintLayout
+				android:id="@+id/constraintLayout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@drawable/rounded_bottom_white"
+				app:layout_constraintTop_toBottomOf="@+id/returnBackTextView"
+				tools:ignore="MissingConstraints"
+				tools:layout_editor_absoluteX="8dp">
+
+				<TextView
+					android:id="@+id/detailsHeader"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="48dp"
+					android:layout_marginStart="@dimen/default_size"
+					android:background="@color/white"
+					android:ellipsize="end"
+					android:lines="1"
+					android:paddingTop="@dimen/activity_vertical_margin"
+					android:textColor="@color/black"
+					android:textSize="@dimen/text_size_large"
+					android:textStyle="bold"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					tools:layout_editor_absoluteX="32dp"
+					tools:layout_editor_absoluteY="16dp" />
+
+				<View
+					android:id="@+id/divider"
+					android:layout_width="0dp"
+					android:layout_height="1dp"
+					android:layout_marginEnd="@dimen/default_size"
+					android:layout_marginStart="@dimen/default_size"
+					android:layout_marginTop="8dp"
+					android:background="@color/application_inactive"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/detailsHeader"
+					tools:layout_editor_absoluteX="32dp" />
+
+				<TextView
+					android:id="@+id/sendSignalByTimeTitle"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/half_default_size"
+					android:layout_marginStart="@dimen/default_size"
+					android:background="@color/white"
+					android:text="@string/send_signal_by_time"
+					app:layout_constraintStart_toStartOf="parent"
+					tools:layout_editor_absoluteX="32dp" />
+
+				<View
+					android:id="@+id/dividerSignal"
+					android:layout_width="0dp"
+					android:layout_height="1dp"
+					android:layout_marginEnd="@dimen/default_size"
+					android:layout_marginStart="@dimen/default_size"
+					android:layout_marginTop="@dimen/activity_vertical_margin"
+					android:background="@color/application_inactive"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					tools:layout_editor_absoluteX="32dp" />
+
+				<LinearLayout
+					android:id="@+id/container_photo"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="@dimen/default_size"
+					android:layout_marginTop="@dimen/activity_vertical_margin"
+					android:orientation="horizontal"
+					app:layout_constraintHorizontal_weight="2"
+					app:layout_constraintTop_toBottomOf="@+id/dividerSignal">
+
+					<TextView
+						android:id="@+id/photosQuantityTextView"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:background="@color/white"
+						android:drawablePadding="8dp"
+						android:drawableStart="@drawable/ic_photo_camera"
+						android:gravity="center_vertical"
+						android:textSize="@dimen/text_size_large"
+						android:visibility="gone" />
+
+					<TextView
+						android:id="@+id/videosQuantityTextView"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="@dimen/default_size"
+						android:layout_weight="1"
+						android:background="@color/white"
+						android:drawablePadding="8dp"
+						android:drawableStart="@drawable/ic_antique_cinema_camera"
+						android:gravity="center_vertical"
+						android:textSize="@dimen/text_size_large"
+						android:visibility="gone"
+						app:layout_constraintBaseline_toBaselineOf="@+id/photosQuantityTextView"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintHorizontal_weight="2"
+						app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+					<TextView
+						android:id="@+id/pictureQuantityTextView"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="@dimen/default_size"
+						android:layout_weight="1"
+						android:background="@color/white"
+						android:drawablePadding="8dp"
+						android:drawableStart="@drawable/ic_insert_picture_icon"
+						android:gravity="center_vertical"
+						android:textSize="@dimen/text_size_large"
+						android:visibility="gone"
+						app:layout_constraintBaseline_toBaselineOf="@+id/photosQuantityTextView"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintHorizontal_weight="2"
+						app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+				</LinearLayout>
+
+				<include
+					android:id="@+id/contentLayout"
+					layout="@layout/content_details_layout"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/container_photo"
+					tools:layout_editor_absoluteX="16dp" />
+
+			</android.support.constraint.ConstraintLayout>
+
+		</android.support.constraint.ConstraintLayout>
+
+	</android.support.v4.widget.NestedScrollView>
+
+	<include
+		android:id="@+id/bottomNavigation"
+		layout="@layout/bottom_navigation"
+		android:layout_width="match_parent"
+		android:layout_height="60dp"
+		android:layout_alignParentBottom="true" />
+
+</RelativeLayout>
