@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import user.com.stopthefakes.App;
+import user.com.stopthefakes.AuthorizationActivity;
 import user.com.stopthefakes.BaseActivity;
 import user.com.stopthefakes.R;
 import user.com.stopthefakes.SettingsActivity;
@@ -61,9 +63,26 @@ public class ApplicationsListActivity extends BaseActivity implements Applicatio
 		setContentView(R.layout.activity_applications);
 		setUnbinder(ButterKnife.bind(this));
 
-		initRecyclerView();
-		initAdapter();
-		reloadList();
+		App app = App.getApp();
+		String token = app.getToken();
+
+		if (token.equals("")) {
+			startActivity(new Intent(this, AuthorizationActivity.class));
+		} else {
+			initRecyclerView();
+			initAdapter();
+			reloadList();
+		}
+	}
+
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		String token = App.getApp().getToken();
+		if (token.equals("")) {
+			startActivity(new Intent(this, AuthorizationActivity.class));
+		}
 	}
 
 
