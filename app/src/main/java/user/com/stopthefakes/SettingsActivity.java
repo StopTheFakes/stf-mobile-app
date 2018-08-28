@@ -20,8 +20,27 @@ public class SettingsActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		App app = App.getApp();
+		String token = app.getToken();
+
+		if (token.equals("")) {
+			startActivity(new Intent(this, AuthorizationActivity.class));
+			return;
+		}
+
 		setContentView(R.layout.activity_settings);
 		setUnbinder(ButterKnife.bind(this));
+	}
+
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		String token = App.getApp().getToken();
+		if (token.equals("")) {
+			startActivity(new Intent(this, AuthorizationActivity.class));
+		}
 	}
 
 
