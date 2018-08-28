@@ -22,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import user.com.stopthefakes.App;
+import user.com.stopthefakes.AuthorizationActivity;
 import user.com.stopthefakes.BaseActivity;
 import user.com.stopthefakes.R;
 import user.com.stopthefakes.SettingsActivity;
@@ -97,6 +98,14 @@ public class ApplicationActivity extends BaseActivity {
 		setContentView(R.layout.activity_application_details);
 		setUnbinder(ButterKnife.bind(this));
 
+		App app = App.getApp();
+		String token = app.getToken();
+
+		if (token.equals("")) {
+			startActivity(new Intent(this, AuthorizationActivity.class));
+			return;
+		}
+
 		id = getIntent().getIntExtra("id", -1);
 
 		if (id == -1) {
@@ -104,7 +113,7 @@ public class ApplicationActivity extends BaseActivity {
 			return;
 		}
 
-		ApplicationsAdapter apps = App.getApp().getApplicationsAdapter();
+		ApplicationsAdapter apps = app.getApplicationsAdapter();
 
 		if (apps.getItemCount() < id) {
 			Log.e("ExpiredApplication", "Application with id " + id + " not founded");
@@ -174,6 +183,16 @@ public class ApplicationActivity extends BaseActivity {
 			case "Poland":
 				countryImageView.setImageResource(R.drawable.po_flag);
 				break;
+		}
+	}
+
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		String token = App.getApp().getToken();
+		if (token.equals("")) {
+			startActivity(new Intent(this, AuthorizationActivity.class));
 		}
 	}
 
