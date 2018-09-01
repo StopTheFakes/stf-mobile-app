@@ -7,12 +7,10 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 
 import org.json.JSONObject;
-import org.json.JSONException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,18 +50,20 @@ public class AuthorizationActivity extends BaseActivity {
 	}
 
 
-	@OnClick({R.id.signUpButton, R.id.signInButton})
+	@OnClick({R.id.signInButton})
 	public void signIn() {
 		FieldsValidator.errorWatcher(emailEditText, fieldsValidator.isEmailValid(emailEditText.getText().toString()));
 		FieldsValidator.errorWatcher(passwordEditText, fieldsValidator.isPasswordValid(passwordEditText.getText().toString()));
 
-		if (!hasErrors()) {
+		if (isValid()) {
 			final App app = App.getApp();
 			Request req = new Request("login", Request.Method.POST, false) {
 				@Override
 				public void onSuccess(JSONObject result) {
-					try {
-						String token = result.getString("token");
+					String token = app.getStringFromJSONObject(result,"token", "");
+					if (token.equals("")) {
+						app.toast(R.string.api_err_server_err);
+					} else {
 						app.setToken(token);
 						app.reloadCurrentUser(new RequestCallback() {
 							@Override
@@ -74,13 +74,10 @@ public class AuthorizationActivity extends BaseActivity {
 							@Override
 							public void onError(Exception e) {
 								Log.e("reloadCurrentUser", e.getMessage(), e);
-								Toast.makeText(app.getApplicationContext(), app.getString(R.string.api_err_server_err), Toast.LENGTH_LONG).show();
+								app.toast(R.string.api_err_server_err);
 								app.logout();
 							}
 						});
-					} catch (JSONException e) {
-						Log.e("signIn", e.getMessage(), e);
-						Toast.makeText(getApplicationContext(), getString(R.string.api_err_server_err), Toast.LENGTH_LONG).show();
 					}
 				}
 
@@ -88,7 +85,7 @@ public class AuthorizationActivity extends BaseActivity {
 				public void onConnectionError(Exception e) {
 					if (e instanceof AuthFailureError) {
 						Log.e("signIn", e.getMessage(), e);
-						Toast.makeText(getApplicationContext(), getString(R.string.api_err_incorrect_cred), Toast.LENGTH_LONG).show();
+						app.toast(R.string.api_err_incorrect_cred);
 					} else {
 						super.onConnectionError(e);
 					}
@@ -96,6 +93,59 @@ public class AuthorizationActivity extends BaseActivity {
 			};
 			req.addBodyParam("email", emailEditText.getText().toString());
 			req.addBodyParam("password", passwordEditText.getText().toString());
+			req.process(app);
+		}
+	}
+
+
+	@OnClick({R.id.signUpButton})
+	public void signUp() {
+		FieldsValidator.errorWatcher(emailEditText, fieldsValidator.isEmailValid(emailEditText.getText().toString()));
+		FieldsValidator.errorWatcher(passwordEditText, fieldsValidator.isPasswordValid(passwordEditText.getText().toString()));
+
+		if (isValid()) {
+			final App app = App.getApp();
+
+			final String emailParam    = emailEditText.getText().toString();
+			final String passwordParam = passwordEditText.getText().toString();
+
+			Request req = new Request("register", Request.Method.POST, false) {
+				@Override
+				public void onSuccess(JSONObject result) {
+					String token = app.getStringFromJSONObject(result, "token", "");
+					if (token.equals("")) {
+						app.toast(R.string.api_err_server_err);
+					} else {
+						app.setToken(token);
+						app.reloadCurrentUser(new RequestCallback() {
+							@Override
+							public void onSuccess() {
+								app.toast(R.string.register_success);
+								goToList();
+							}
+
+							@Override
+							public void onError(Exception e) {
+								Log.e("signUp", e.getMessage(), e);
+								app.toast(R.string.api_err_server_err);
+								app.logout();
+							}
+						});
+					}
+				}
+
+				@Override
+				public void onConnectionError(Exception e) {
+					if (e instanceof AuthFailureError) {
+						Log.e("signUp", e.getMessage(), e);
+						app.toast(R.string.api_err_incorrect_cred);
+					} else {
+						super.onConnectionError(e);
+					}
+				}
+			};
+			req.addBodyParam("email", emailParam);
+			req.addBodyParam("password", passwordParam);
 			req.process(app);
 		}
 	}
@@ -124,8 +174,8 @@ public class AuthorizationActivity extends BaseActivity {
 	}
 
 
-	private boolean hasErrors() {
-		return emailEditText.getError() != null || passwordEditText.getError() != null;
+	private boolean isValid() {
+		return emailEditText.getError() == null && passwordEditText.getError() == null;
 	}
 
 

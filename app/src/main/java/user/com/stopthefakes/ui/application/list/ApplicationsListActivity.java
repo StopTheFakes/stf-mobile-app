@@ -7,9 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -149,14 +147,14 @@ public class ApplicationsListActivity extends BaseActivity implements Applicatio
 					applicationsAdapter.sort(true);
 				} catch (JSONException e) {
 					Log.e("reloadList", e.getMessage(), e);
-					Toast.makeText(getApplicationContext(), getString(R.string.api_err_server_err), Toast.LENGTH_LONG).show();
+					App.getApp().toast(R.string.api_err_server_err);
 				}
 			}
 
 			@Override
 			public void onError(Exception e) {
 				super.onError(e);
-				Toast.makeText(getApplicationContext(), getString(R.string.api_err_server_err), Toast.LENGTH_LONG).show();
+				App.getApp().toast(R.string.api_err_server_err);
 			}
 		};
 
@@ -202,7 +200,7 @@ public class ApplicationsListActivity extends BaseActivity implements Applicatio
 	@Override
 	public void onSendSignalClicked(DbApplication app) {
 		if (app.isExpired()) {
-			Toast.makeText(getApplicationContext(), getString(R.string.application_expired), Toast.LENGTH_LONG).show();
+			App.getApp().toast(R.string.application_expired);
 			return;
 		}
 		int id = app.getId().intValue();
@@ -227,17 +225,17 @@ public class ApplicationsListActivity extends BaseActivity implements Applicatio
 	@Override
 	public void onTakingInWorkClicked(DbApplication app) {
 		if (app.isTaken()) {
-			Toast.makeText(getApplicationContext(), getString(R.string.application_already_in_progress), Toast.LENGTH_LONG).show();
+			App.getApp().toast(R.string.application_already_in_progress);
 			return;
 		}
 		if (app.isExpired()) {
-			Toast.makeText(getApplicationContext(), getString(R.string.application_expired), Toast.LENGTH_LONG).show();
+			App.getApp().toast(R.string.application_expired);
 			return;
 		}
 		Request req = new Request("request/" + String.valueOf(app.getId()) + "/take", Request.Method.POST) {
 			@Override
 			public void onSuccess(JSONObject r) {
-				Toast.makeText(getApplicationContext(), getString(R.string.application_taken), Toast.LENGTH_LONG).show();
+				App.getApp().toast(R.string.application_taken);
 				reloadList();
 			}
 

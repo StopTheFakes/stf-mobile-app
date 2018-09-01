@@ -1,9 +1,10 @@
 package user.com.stopthefakes;
 
 import android.app.Application;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -56,6 +57,7 @@ public class App extends Application {
 
 
 	public void reloadCurrentUser(final RequestCallback cb) {
+		final App app = this;
 		Request req = new Request("user", Request.Method.GET) {
 			@Override
 			public void onSuccess(JSONObject result) {
@@ -66,18 +68,18 @@ public class App extends Application {
 					JSONArray data = result.getJSONArray("data");
 					JSONObject row = data.getJSONObject(0);
 
-					editor.putInt(   "user.id",         row.getInt("id"));
-					editor.putString("user.name",       row.getString("name"));
-					editor.putString("user.email",      row.getString("email"));
-					editor.putInt(   "user.country",    row.getInt("country"));
-					editor.putInt(   "user.city",       row.getInt("city"));
-					editor.putString("user.annotation", row.getString("annotation"));
-					editor.putInt(   "user.notified",   row.getInt("notified"));
-					editor.putString("user.avatar",     row.getString("avatar"));
-					editor.putInt(   "user.stars",      row.getInt("stars"));
-					editor.putInt(   "user.like",       row.getInt("like"));
-					editor.putInt(   "user.dislike",    row.getInt("dislike"));
-					editor.putInt(   "user.strike",     row.getInt("strike"));
+					editor.putInt("user.id", app.getIntFromJSONObject(row,"id", 0));
+					editor.putString("user.name", app.getStringFromJSONObject(row, "name", ""));
+					editor.putString("user.email", app.getStringFromJSONObject(row, "email", ""));
+					editor.putInt("user.country", app.getIntFromJSONObject(row,"country", 0));
+					editor.putInt("user.city", app.getIntFromJSONObject(row,"city", 0));
+					editor.putString("user.annotation", app.getStringFromJSONObject(row, "annotation", ""));
+					editor.putInt("user.notified", app.getIntFromJSONObject(row,"notified", 0));
+					editor.putString("user.avatar", app.getStringFromJSONObject(row, "avatar", ""));
+					editor.putInt("user.stars", app.getIntFromJSONObject(row,"stars", 0));
+					editor.putInt("user.like", app.getIntFromJSONObject(row,"like", 0));
+					editor.putInt("user.dislike", app.getIntFromJSONObject(row,"dislike", 0));
+					editor.putInt("user.strike", app.getIntFromJSONObject(row,"strike", 0));
 
 					editor.apply();
 
@@ -115,8 +117,33 @@ public class App extends Application {
 	}
 
 
+	public void toast(Integer message) {
+		Toast.makeText(getApplicationContext(), getString(message), Toast.LENGTH_LONG).show();
+	}
+
+
 	public void logout() {
 		setToken("");
+	}
+
+
+	public int getIntFromJSONObject(JSONObject obj, String key, Integer def) {
+		try {
+			return obj.has(key) && !obj.isNull(key) ? obj.getInt(key) : def;
+		} catch (Exception e) {
+			Log.e("getIntFromJSONObject", e.getMessage(), e);
+			return def;
+		}
+	}
+
+
+	public String getStringFromJSONObject(JSONObject obj, String key, String def) {
+		try {
+			return obj.has(key) && !obj.isNull(key) ? obj.getString(key) : def;
+		} catch (Exception e) {
+			Log.e("getIntFromJSONObject", e.getMessage(), e);
+			return def;
+		}
 	}
 
 }

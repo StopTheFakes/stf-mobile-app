@@ -91,7 +91,7 @@
 	<string name="expired">Expired</string>
 
 	<!--API-->
-	<string name="api_base_url">http://stf.glissmedia.ru/api/v1/</string>
+	<string name="api_base_url">http://stf.glissmedia.ru/api/</string>
 	<string name="api_err_conn_lost">Internet connection lost</string>
 	<string name="api_err_incorrect_cred">Incorrect email or password</string>
 	<string name="api_err_server_err">Server error</string>
@@ -103,4 +103,7 @@
 	<string name="make_photo_button">Make photo button</string>
 	<string name="make_video_button">Make video button</string>
 	<string name="file_photo_label">photo %1$s/%2$s</string>
+	<string name="main_auth_bg">Main auth bg</string>
+	<string name="stopthefakes">StopTheFakes</string>
+	<string name="register_success">Register completed. Check email to confirm account</string>
 </resources>

@@ -2,7 +2,6 @@ package user.com.stopthefakes.api;
 
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NoConnectionError;
@@ -31,6 +30,7 @@ public class Request {
 
 	private Boolean useAuth;
 	private String url;
+	private String urlPrefix;
 	private int method;
 	private App app;
 	private Map<String, String> bodyParams = new HashMap<>();
@@ -40,6 +40,7 @@ public class Request {
 		this.url = url;
 		this.method = method;
 		this.useAuth = useAuth;
+		this.urlPrefix = "v1/";
 	}
 
 
@@ -47,6 +48,7 @@ public class Request {
 		this.url = url;
 		this.method = method;
 		this.useAuth = true;
+		this.urlPrefix = "v1/";
 	}
 
 
@@ -57,26 +59,30 @@ public class Request {
 
 	public void process(final App app) {
 		this.app = app;
+
 		RequestQueue queue = Volley.newRequestQueue(app);
-		StringRequest req = new StringRequest(method, app.getString(R.string.api_base_url) + url,
-			new Response.Listener<String>() {
-				@Override
-				public void onResponse(String response) {
-					try {
-						JSONObject result = new JSONObject(response);
-						onSuccess(result);
-					} catch (JSONException e) {
-						onError(e);
-					}
-				}
-			},
-			new Response.ErrorListener() {
-				@Override
-				public void onErrorResponse(VolleyError e) {
-					onConnectionError(e);
+
+		String reqUrl = app.getString(R.string.api_base_url) + urlPrefix + url;
+
+		Log.d("Request/process/url", reqUrl);
+
+		StringRequest req = new StringRequest(method, reqUrl, new Response.Listener<String>() {
+			@Override
+			public void onResponse(String response) {
+				Log.d("Request.process.resp", response);
+				try {
+					JSONObject result = new JSONObject(response);
+					onSuccess(result);
+				} catch (JSONException e) {
+					onError(e);
 				}
 			}
-		) {
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError e) {
+				onConnectionError(e);
+			}
+		}) {
 			@Override
 			public Map<String, String> getHeaders() {
 				Map<String, String> headers = new HashMap<>();
@@ -106,11 +112,11 @@ public class Request {
 	public void onConnectionError(Exception e) {
 		Log.e("onConnectionError", e.getMessage(), e);
 		if (e instanceof NoConnectionError) {
-			Toast.makeText(app.getApplicationContext(), app.getString(R.string.api_err_conn_lost), Toast.LENGTH_LONG).show();
+			app.toast(R.string.api_err_conn_lost);
 		} else if (e instanceof AuthFailureError) {
 			app.logout();
 		} else {
-			Toast.makeText(app.getApplicationContext(), app.getString(R.string.api_err_server_err), Toast.LENGTH_LONG).show();
+			app.toast(R.string.api_err_server_err);
 		}
 	}
 
