@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import user.com.stopthefakes.App;
@@ -69,11 +70,13 @@ public class Request {
 		StringRequest req = new StringRequest(method, reqUrl, new Response.Listener<String>() {
 			@Override
 			public void onResponse(String response) {
-				Log.d("Request.process.resp", response);
+				Log.d("Request.resp.len", String.format(Locale.getDefault(), "%d", response.length()));
+				Log.d("Request.resp", response);
 				try {
 					JSONObject result = new JSONObject(response);
 					onSuccess(result);
 				} catch (JSONException e) {
+					Log.e("Request.parseError", e.getMessage(), e);
 					onError(e);
 				}
 			}

@@ -106,4 +106,20 @@
 	<string name="main_auth_bg">Main auth bg</string>
 	<string name="stopthefakes">StopTheFakes</string>
 	<string name="register_success">Register completed. Check email to confirm account</string>
+	<string name="messages">Messages</string>
+	<string name="enter_your_name">Enter your name</string>
+	<string name="enter_your_email">Enter your email</string>
+	<string name="enter_text">Enter text</string>
+	<string name="_172_points_left_to_level_up">172 points left to level up</string>
+	<string name="icon_favorite">icon favorite</string>
+	<string name="ico_thumbs_up_hand_symbol">ico thumbs up hand symbol</string>
+	<string name="ico_attention">ico attention</string>
+	<string name="bonus_coefficient">Bonus coefficient</string>
+	<string name="notify_settings">Notify settings</string>
+	<string name="instantly">Instantly</string>
+	<string name="turn_off_notifications">Turn off notifications</string>
+	<string name="change_password">Change password</string>
+	<string name="enter_the_current_password">Enter the current password</string>
+	<string name="enter_the_new_password">Enter the new password</string>
+	<string name="profile_saved">Profile saved</string>
 </resources>

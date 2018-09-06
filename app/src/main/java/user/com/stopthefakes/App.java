@@ -62,26 +62,21 @@ public class App extends Application {
 			@Override
 			public void onSuccess(JSONObject result) {
 				try {
-					SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-					SharedPreferences.Editor editor = sharedPref.edit();
-
 					JSONArray data = result.getJSONArray("data");
 					JSONObject row = data.getJSONObject(0);
 
-					editor.putInt("user.id", app.getIntFromJSONObject(row,"id", 0));
-					editor.putString("user.name", app.getStringFromJSONObject(row, "name", ""));
-					editor.putString("user.email", app.getStringFromJSONObject(row, "email", ""));
-					editor.putInt("user.country", app.getIntFromJSONObject(row,"country", 0));
-					editor.putInt("user.city", app.getIntFromJSONObject(row,"city", 0));
-					editor.putString("user.annotation", app.getStringFromJSONObject(row, "annotation", ""));
-					editor.putInt("user.notified", app.getIntFromJSONObject(row,"notified", 0));
-					editor.putString("user.avatar", app.getStringFromJSONObject(row, "avatar", ""));
-					editor.putInt("user.stars", app.getIntFromJSONObject(row,"stars", 0));
-					editor.putInt("user.like", app.getIntFromJSONObject(row,"like", 0));
-					editor.putInt("user.dislike", app.getIntFromJSONObject(row,"dislike", 0));
-					editor.putInt("user.strike", app.getIntFromJSONObject(row,"strike", 0));
-
-					editor.apply();
+					app.setIntToStore("user.id", app.getIntFromJSONObject(row,"id", 0));
+					app.setStringToStore("user.name", app.getStringFromJSONObject(row, "name", ""));
+					app.setStringToStore("user.email", app.getStringFromJSONObject(row, "email", ""));
+					app.setIntToStore("user.country", app.getIntFromJSONObject(row,"country", 0));
+					app.setIntToStore("user.city", app.getIntFromJSONObject(row,"city", 0));
+					app.setStringToStore("user.annotation", app.getStringFromJSONObject(row, "annotation", ""));
+					app.setIntToStore("user.notified", app.getIntFromJSONObject(row,"notified", 0));
+					app.setStringToStore("user.avatar", app.getStringFromJSONObject(row, "avatar", ""));
+					app.setIntToStore("user.stars", app.getIntFromJSONObject(row,"stars", 0));
+					app.setIntToStore("user.like", app.getIntFromJSONObject(row,"like", 0));
+					app.setIntToStore("user.dislike", app.getIntFromJSONObject(row,"dislike", 0));
+					app.setIntToStore("user.strike", app.getIntFromJSONObject(row,"strike", 0));
 
 					cb.onSuccess();
 				} catch (Exception e) {
@@ -104,16 +99,12 @@ public class App extends Application {
 
 
 	public void setToken(String token) {
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-		SharedPreferences.Editor editor = sharedPref.edit();
-		editor.putString("token", token);
-		editor.apply();
+		this.setStringToStore("token", token);
 	}
 
 
 	public String getToken() {
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-		return sharedPref.getString("token", "");
+		return this.getStringFromStore("token");
 	}
 
 
@@ -144,6 +135,34 @@ public class App extends Application {
 			Log.e("getIntFromJSONObject", e.getMessage(), e);
 			return def;
 		}
+	}
+
+
+	public String getStringFromStore(String key) {
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		return sharedPref.getString(key, "");
+	}
+
+
+	public Integer getIntFromStore(String key) {
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		return sharedPref.getInt(key, 0);
+	}
+
+
+	public void setStringToStore(String key, String value) {
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		SharedPreferences.Editor editor = sharedPref.edit();
+		editor.putString(key, value);
+		editor.apply();
+	}
+
+
+	public void setIntToStore(String key, Integer value) {
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		SharedPreferences.Editor editor = sharedPref.edit();
+		editor.putInt(key, value);
+		editor.apply();
 	}
 
 }
