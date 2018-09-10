@@ -1,118 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background">
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/background">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true"
+		android:layout_centerVertical="true">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:background="@drawable/rounded_layout"
-            android:elevation="8dp"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/activity_horizontal_margin">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="@dimen/activity_horizontal_margin"
+			android:layout_marginRight="@dimen/activity_horizontal_margin"
+			android:background="@drawable/rounded_layout"
+			android:elevation="8dp"
+			android:orientation="vertical"
+			android:paddingBottom="@dimen/activity_horizontal_margin"
+			tools:ignore="UselessParent">
 
-            <TextView
-                android:id="@+id/closeSignalAcceptedTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:drawableEnd="@drawable/ic_close_24dp"
-                android:paddingEnd="8dp" />
+			<TextView
+				android:id="@+id/closeSignalAcceptedTextView"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="8dp"
+				android:drawableEnd="@drawable/ic_close_24dp"
+				android:paddingStart="8dp"
+				android:paddingEnd="8dp" />
 
-            <ImageView
-                android:id="@+id/acceptedImageView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
-                android:elevation="8dp"
-                android:src="@drawable/ic_check" />
+			<ImageView
+				android:id="@+id/acceptedImageView"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/activity_horizontal_margin"
+				android:elevation="8dp"
+				android:src="@drawable/ic_check"
+				android:contentDescription="@string/accepted_image" />
 
-            <TextView
-                android:id="@+id/thanksTitleTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
-                android:gravity="center"
-                android:text="@string/thanks"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_extra_large_22"
-                android:textStyle="bold" />
+			<TextView
+				android:id="@+id/thanksTitleTextView"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/activity_horizontal_margin"
+				android:gravity="center"
+				android:text="@string/thanks"
+				android:textColor="@color/black"
+				android:textSize="@dimen/text_size_extra_large_22"
+				android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/yourSignalTitleTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/your_application_signal"
-                android:textColor="@color/textColorSecondary"
-                android:textSize="@dimen/text_size_extra_large_20"
-                android:textStyle="bold" />
+			<TextView
+				android:id="@+id/yourSignalTitleTextView"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:text="@string/your_application_signal"
+				android:textColor="@color/textColorSecondary"
+				android:textSize="@dimen/text_size_extra_large_20"
+				android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/rounded_signal_number"
-                android:paddingBottom="4dp"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingTop="4dp"
-                android:text="№0001"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_extra_large_30"
-                android:textStyle="bold" />
+			<TextView
+				android:id="@+id/signalTextView"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginTop="8dp"
+				android:background="@drawable/rounded_signal_number"
+				android:paddingBottom="4dp"
+				android:paddingEnd="@dimen/activity_horizontal_margin"
+				android:paddingStart="@dimen/activity_horizontal_margin"
+				android:paddingTop="4dp"
+				android:textColor="@color/black"
+				android:textSize="@dimen/text_size_extra_large_30"
+				android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/yourSignalSentTitleTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="sent!"
-                android:textColor="@color/textColorSecondary"
-                android:textSize="@dimen/text_size_extra_large_20"
-                android:textStyle="bold" />
+			<TextView
+				android:id="@+id/yourSignalSentTitleTextView"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="8dp"
+				android:gravity="center"
+				android:text="@string/sent"
+				android:textColor="@color/textColorSecondary"
+				android:textSize="@dimen/text_size_extra_large_20"
+				android:textStyle="bold" />
 
-            <View
-                android:id="@+id/divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:background="@color/application_inactive" />
+			<View
+				android:id="@+id/divider"
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:layout_marginEnd="32dp"
+				android:layout_marginStart="32dp"
+				android:layout_marginTop="@dimen/activity_vertical_margin"
+				android:background="@color/application_inactive" />
 
-            <TextView
-                android:id="@+id/waitForCustomerTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="@string/wait_for_customer"
-                android:textColor="@color/textColorSecondary"
-                android:textSize="@dimen/text_size_extra_large_20" />
+			<TextView
+				android:id="@+id/waitForCustomerTextView"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/activity_horizontal_margin"
+				android:layout_marginStart="@dimen/activity_horizontal_margin"
+				android:layout_marginTop="8dp"
+				android:gravity="center"
+				android:text="@string/wait_for_customer"
+				android:textColor="@color/textColorSecondary"
+				android:textSize="@dimen/text_size_extra_large_20" />
 
-        </LinearLayout>
+		</LinearLayout>
 
-    </RelativeLayout>
+	</RelativeLayout>
 
-    <include
-        android:id="@+id/bottomNavigation"
-        layout="@layout/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true" />
+	<include
+		android:id="@+id/bottomNavigation"
+		layout="@layout/bottom_navigation"
+		android:layout_width="match_parent"
+		android:layout_height="60dp"
+		android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

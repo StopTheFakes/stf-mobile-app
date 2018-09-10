@@ -23,6 +23,7 @@ import user.com.stopthefakes.R;
 import user.com.stopthefakes.SettingsActivity;
 import user.com.stopthefakes.entity.DbApplication;
 import user.com.stopthefakes.entity.Value;
+import user.com.stopthefakes.ui.application.all.AllSignalsActivity;
 import user.com.stopthefakes.ui.application.list.ApplicationsAdapter;
 import user.com.stopthefakes.ui.application.list.ApplicationsListActivity;
 import user.com.stopthefakes.ui.application.signal.SendSignalPageActivity;
@@ -52,8 +53,8 @@ public class ExpiredApplicationActivity extends BaseActivity {
 	@BindView(R.id.rightsInfoTextView)
 	TextView rightsInfoTextView;
 
-	@BindView(R.id.tipesInfoTextView)
-	TextView tipesInfoTextView;
+	@BindView(R.id.tipsInfoTextView)
+	TextView tipsInfoTextView;
 
 	@BindView(R.id.pictureQuantityTextView)
 	TextView pictureQuantityTextView;
@@ -125,7 +126,7 @@ public class ExpiredApplicationActivity extends BaseActivity {
 		detailsHeader.setText(mDbApplication.getHeader());
 		countryTextView.setText(mDbApplication.getCountry());
 		rightsInfoTextView.setText(mDbApplication.getRightToUser());
-		tipesInfoTextView.setText(mDbApplication.getTipes());
+		tipsInfoTextView.setText(mDbApplication.getTips());
 		citiesListTextView.setText(TextUtils.join(", ", mDbApplication.getCitiesList()));
 
 		String[] alerts = mDbApplication.getAlerts();
@@ -207,7 +208,7 @@ public class ExpiredApplicationActivity extends BaseActivity {
 
 	@OnClick(R.id.sendSignalNavigationButton)
 	public void openSignals() {
-		startActivity(SendSignalPageActivity.newInstance(this));
+		startActivity(AllSignalsActivity.newInstance(this));
 	}
 
 	@OnClick(R.id.goToMenuPageButton)

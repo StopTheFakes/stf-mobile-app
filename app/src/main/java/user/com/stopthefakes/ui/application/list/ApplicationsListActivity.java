@@ -30,6 +30,7 @@ import user.com.stopthefakes.BaseActivity;
 import user.com.stopthefakes.R;
 import user.com.stopthefakes.SettingsActivity;
 import user.com.stopthefakes.api.Request;
+import user.com.stopthefakes.ui.application.all.AllSignalsActivity;
 import user.com.stopthefakes.ui.application.applications.ApplicationActivity;
 import user.com.stopthefakes.ui.application.applications.ExpiredApplicationActivity;
 import user.com.stopthefakes.ui.application.applications.InWorkApplicationActivity;
@@ -102,7 +103,8 @@ public class ApplicationsListActivity extends BaseActivity implements Applicatio
 						item = data.getJSONObject(i);
 						app = new DbApplication();
 						app.setId(Long.parseLong(item.getString("claim_id")));
-						app.setShordDescription("short desc");
+						app.setShordDescription(item.getString("description"));
+						app.setTips(item.getString("recommendation"));
 						app.setHeader(item.getString("title"));
 						app.setPhotosQuantity(100L);
 						app.setVideosQuantity(103L);
@@ -113,6 +115,26 @@ public class ApplicationsListActivity extends BaseActivity implements Applicatio
 						}
 						app.setCitiesList(cities);
 						app.setCountry(item.getString("country"));
+
+						try {
+							JSONArray rights = item.getJSONArray("usage_rights");
+							app.setRightToUser(rights.getString(0));
+						} catch (Exception e) {
+							app.setRightToUser("");
+							Log.e("reloadList", e.getMessage(), e);
+						}
+
+						List<String> accepted = new ArrayList<>();
+						try {
+							JSONArray acceptedList = item.getJSONArray("accepted");
+							for (int j = 0; j < acceptedList.length(); ++j) {
+								accepted.add(acceptedList.getString(j));
+							}
+						} catch (Exception e) {
+							Log.e("reloadList", e.getMessage(), e);
+						}
+
+						app.setAccepted(accepted.toArray(new String[0]));
 
 						try {
 							created = item.getString("created_at");
@@ -257,7 +279,7 @@ public class ApplicationsListActivity extends BaseActivity implements Applicatio
 
 	@OnClick(R.id.sendSignalNavigationButton)
 	public void openSignals() {
-		startActivity(SendSignalPageActivity.newInstance(this));
+		startActivity(AllSignalsActivity.newInstance(this));
 	}
 
 

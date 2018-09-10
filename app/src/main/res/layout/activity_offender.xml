@@ -1,142 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
 
-    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottomNavigation"
-        android:fillViewport="true">
+	<android.support.v4.widget.NestedScrollView
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_above="@+id/bottomNavigation"
+		android:fillViewport="true">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background"
-            android:orientation="vertical">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@color/background"
+			android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/emailLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_horizontal_margin"
-                android:background="@drawable/rounded_layout"
-                android:elevation="8dp"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/activity_horizontal_margin">
+			<LinearLayout
+				android:id="@+id/emailLayout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/activity_horizontal_margin"
+				android:background="@drawable/rounded_layout"
+				android:elevation="8dp"
+				android:orientation="vertical"
+				android:paddingBottom="@dimen/activity_horizontal_margin"
+				android:focusable="true"
+				android:focusableInTouchMode="true">
 
-                <TextView
-                    android:id="@+id/returnBackTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_text_view_top"
-                    android:drawablePadding="8dp"
-                    android:drawableStart="@drawable/ic_back_arrow_gray"
-                    android:gravity="center_vertical"
-                    android:paddingBottom="4dp"
-                    android:paddingStart="8dp"
-                    android:paddingTop="4dp"
-                    android:text="@string/return_back_title"
-                    android:textSize="@dimen/text_size_large" />
+				<TextView
+					android:id="@+id/returnBackTextView"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@drawable/rounded_text_view_top"
+					android:drawablePadding="8dp"
+					android:drawableStart="@drawable/ic_back_arrow_gray"
+					android:gravity="center_vertical"
+					android:paddingBottom="4dp"
+					android:paddingStart="8dp"
+					android:paddingEnd="8dp"
+					android:paddingTop="4dp"
+					android:text="@string/return_back_title"
+					android:textSize="@dimen/text_size_large" />
 
-                <TextView
-                    android:id="@+id/detailsHeader"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:paddingEnd="@dimen/activity_horizontal_margin"
-                    android:paddingStart="@dimen/default_size"
-                    android:paddingTop="@dimen/activity_vertical_margin"
-                    android:text="Enter the offender's email if you know it. "
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_large"
-                    android:textStyle="bold" />
+				<TextView
+					android:id="@+id/detailsHeader"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@color/white"
+					android:paddingEnd="@dimen/activity_horizontal_margin"
+					android:paddingStart="@dimen/default_size"
+					android:paddingTop="@dimen/activity_vertical_margin"
+					android:text="@string/enter_the_offender_s_email_if_you_know_it"
+					android:textColor="@color/black"
+					android:textSize="@dimen/text_size_large"
+					android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/emailEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/rounded_edit_text"
-                    android:drawableEnd="@drawable/ic_email"
-                    android:hint="@string/authorization_email_hint"
-                    android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:nextFocusForward="@+id/passwordEditText"
-                    android:paddingEnd="@dimen/activity_horizontal_margin"
-                    android:paddingStart="@dimen/activity_horizontal_margin"
-                    android:textColor="@color/textColorSecondary"
-                    android:textCursorDrawable="@null" />
+				<EditText
+					android:id="@+id/emailEditText"
+					android:layout_width="match_parent"
+					android:layout_height="60dp"
+					android:layout_marginEnd="@dimen/activity_horizontal_margin"
+					android:layout_marginStart="@dimen/activity_horizontal_margin"
+					android:layout_marginTop="8dp"
+					android:background="@drawable/rounded_edit_text"
+					android:drawableEnd="@drawable/ic_email"
+					android:hint="@string/authorization_email_hint"
+					android:imeOptions="actionNext"
+					android:inputType="textEmailAddress"
+					android:maxLines="1"
+					android:nextFocusForward="@+id/passwordEditText"
+					android:paddingEnd="@dimen/activity_horizontal_margin"
+					android:paddingStart="@dimen/activity_horizontal_margin"
+					android:textColor="@color/textColorSecondary"
+					android:textCursorDrawable="@null" />
 
-            </LinearLayout>
+			</LinearLayout>
 
-            <include
-                android:id="@+id/websiteLayout"
-                layout="@layout/email_website" />
+			<include
+				android:id="@+id/websiteLayout"
+				layout="@layout/email_website" />
 
-            <LinearLayout
-                android:id="@+id/additionalInfoLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_horizontal_margin"
-                android:background="@drawable/rounded_layout"
-                android:elevation="8dp"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/activity_horizontal_margin">
+			<LinearLayout
+				android:id="@+id/additionalInfoLayout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="@dimen/activity_horizontal_margin"
+				android:background="@drawable/rounded_layout"
+				android:elevation="8dp"
+				android:orientation="vertical"
+				android:paddingBottom="@dimen/activity_horizontal_margin">
 
-                <TextView
-                    android:id="@+id/additionalInfoTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingEnd="@dimen/activity_horizontal_margin"
-                    android:paddingStart="@dimen/default_size"
-                    android:paddingTop="@dimen/activity_vertical_margin"
-                    android:text="Add the address and other information relevant to the Right holder "
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_large"
-                    android:paddingBottom="@dimen/half_default_size"/>
+				<TextView
+					android:id="@+id/additionalInfoTitle"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:paddingEnd="@dimen/activity_horizontal_margin"
+					android:paddingStart="@dimen/default_size"
+					android:paddingTop="@dimen/activity_vertical_margin"
+					android:text="@string/add_the_address_and_other_information_relevant_to_the_right_holder"
+					android:textColor="@color/black"
+					android:textSize="@dimen/text_size_large"
+					android:paddingBottom="@dimen/half_default_size" />
 
-                <EditText
-                    android:id="@+id/additionalInfoEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:background="@drawable/rounded_edit_text"
-                    android:gravity="top"
-                    android:hint="@string/additional_info_hint"
-                    android:inputType="textMultiLine"
-                    android:padding="@dimen/activity_horizontal_margin"
-                    android:textCursorDrawable="@null"
-                    android:textSize="@dimen/base" />
+				<EditText
+						android:id="@+id/additionalInfoEditText"
+						android:layout_width="match_parent"
+						android:layout_height="90dp"
+						android:layout_marginEnd="@dimen/activity_horizontal_margin"
+						android:layout_marginStart="@dimen/activity_horizontal_margin"
+						android:background="@drawable/rounded_edit_text"
+						android:gravity="top"
+						android:hint="@string/additional_info_hint"
+						android:inputType="textMultiLine"
+						android:padding="@dimen/activity_horizontal_margin"
+						android:textCursorDrawable="@null"
+						android:textSize="@dimen/base_sp" />
 
-                <Button
-                    android:id="@+id/sendSignalButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@+id/bottomLayout"
-                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                    android:background="@drawable/rounded_send_signal_transparent"
-                    android:text="@string/send_signal_button"
-                    android:textAllCaps="false"
-                    android:textColor="@color/border_button"
-                    android:textSize="@dimen/text_size_extra_large_20" />
+				<Button
+					android:id="@+id/sendSignalButton"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/activity_horizontal_margin"
+					android:layout_marginStart="@dimen/activity_horizontal_margin"
+					android:layout_marginTop="@dimen/activity_horizontal_margin"
+					android:background="@drawable/rounded_send_signal_transparent"
+					android:text="@string/send_signal_button"
+					android:textAllCaps="false"
+					android:textColor="@color/border_button"
+					android:textSize="@dimen/text_size_extra_large_20" />
 
-            </LinearLayout>
+			</LinearLayout>
 
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+		</LinearLayout>
+	</android.support.v4.widget.NestedScrollView>
 
-    <include
-        android:id="@+id/bottomNavigation"
-        layout="@layout/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true" />
+	<include
+		android:id="@+id/bottomNavigation"
+		layout="@layout/bottom_navigation"
+		android:layout_width="match_parent"
+		android:layout_height="60dp"
+		android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

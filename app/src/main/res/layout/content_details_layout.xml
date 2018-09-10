@@ -2,6 +2,7 @@
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="@color/white">
@@ -70,7 +71,8 @@
 			android:text="@string/theme_title"
 			android:textColor="@color/black"
 			android:textSize="@dimen/text_size_large"
-			android:textStyle="bold" />
+			android:textStyle="bold"
+			tools:ignore="RelativeOverlap" />
 
 		<TextView
 			android:id="@+id/searchingBySubjectTitleTextView"
@@ -186,8 +188,7 @@
 			android:layout_marginEnd="@dimen/activity_horizontal_margin"
 			android:layout_marginStart="@dimen/activity_horizontal_margin"
 			android:layout_marginTop="8dp"
-			android:background="@color/transparent"
-			android:text="@string/fake_string_item_description" />
+			android:background="@color/transparent" />
 
 		<View
 			android:id="@+id/divider2"
@@ -215,10 +216,10 @@
 			android:textStyle="bold" />
 
 		<LinearLayout
+			android:id="@+id/container_for_checkbox"
 			android:layout_marginTop="8dp"
 			android:layout_marginStart="10dp"
 			android:layout_below="@+id/acceptedTitle"
-			android:id="@+id/container_for_checkbox"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="vertical"/>
@@ -256,8 +257,7 @@
 			android:layout_marginEnd="@dimen/activity_horizontal_margin"
 			android:layout_marginStart="@dimen/activity_horizontal_margin"
 			android:layout_marginTop="8dp"
-			android:background="@color/transparent"
-			android:text="@string/fake_string_item_description" />
+			android:background="@color/transparent" />
 
 		<View
 			android:id="@+id/divider4"
@@ -272,28 +272,27 @@
 			android:background="@color/application_inactive" />
 
 		<TextView
-			android:id="@+id/tipesTitleTextView"
+			android:id="@+id/tipsTitleTextView"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:layout_below="@+id/divider4"
 			android:layout_marginStart="@dimen/activity_horizontal_margin"
 			android:layout_marginTop="8dp"
 			android:background="@color/transparent"
-			android:text="@string/tipes_title"
+			android:text="@string/tips_title"
 			android:textColor="@color/black"
 			android:textSize="@dimen/text_size_large"
 			android:textStyle="bold" />
 
 		<TextView
-			android:id="@+id/tipesInfoTextView"
+			android:id="@+id/tipsInfoTextView"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_below="@+id/tipesTitleTextView"
+			android:layout_below="@+id/tipsTitleTextView"
 			android:layout_marginEnd="@dimen/activity_horizontal_margin"
 			android:layout_marginStart="@dimen/activity_horizontal_margin"
 			android:layout_marginTop="8dp"
-			android:background="@color/transparent"
-			android:text="@string/fake_string_item_description" />
+			android:background="@color/transparent" />
 
 		<View
 			android:id="@+id/divider5"
@@ -301,7 +300,7 @@
 			android:layout_height="1dp"
 			android:layout_alignParentEnd="true"
 			android:layout_alignParentStart="true"
-			android:layout_below="@+id/tipesInfoTextView"
+			android:layout_below="@+id/tipsInfoTextView"
 			android:layout_marginEnd="@dimen/activity_horizontal_margin"
 			android:layout_marginStart="@dimen/activity_horizontal_margin"
 			android:layout_marginTop="8dp"

@@ -77,6 +77,7 @@ public class App extends Application {
 					app.setIntToStore("user.like", app.getIntFromJSONObject(row,"like", 0));
 					app.setIntToStore("user.dislike", app.getIntFromJSONObject(row,"dislike", 0));
 					app.setIntToStore("user.strike", app.getIntFromJSONObject(row,"strike", 0));
+					app.setStringToStore("user.balance", app.getStringFromJSONObject(row, "balance", "0.00"));
 
 					cb.onSuccess();
 				} catch (Exception e) {

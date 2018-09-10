@@ -4,6 +4,7 @@ package user.com.stopthefakes.api;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.NoConnectionError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -14,6 +15,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -35,6 +39,7 @@ public class Request {
 	private int method;
 	private App app;
 	private Map<String, String> bodyParams = new HashMap<>();
+	Map<String, String> bodyFiles = new HashMap<>();
 
 
 	protected Request(String url, int method, boolean useAuth) {
@@ -55,6 +60,11 @@ public class Request {
 
 	public void addBodyParam(String key, String value) {
 		bodyParams.put(key, value);
+	}
+
+
+	public void addFile(String key, String path) {
+		bodyFiles.put(key, path);
 	}
 
 
@@ -100,6 +110,77 @@ public class Request {
 				return bodyParams;
 			}
 		};
+
+		queue.add(req);
+	}
+
+
+	public void processMultipart(final App app) {
+		this.app = app;
+
+		RequestQueue queue = Volley.newRequestQueue(app);
+
+		String reqUrl = app.getString(R.string.api_base_url) + urlPrefix + url;
+
+		Log.d("Request/process/url", reqUrl);
+
+		VolleyMultipartRequest req = new VolleyMultipartRequest(Request.Method.POST, reqUrl, new Response.Listener<NetworkResponse>() {
+			@Override
+			public void onResponse(NetworkResponse nResponse) {
+				String response = new String(nResponse.data);
+				Log.d("Request.resp.len", String.format(Locale.getDefault(), "%d", response.length()));
+				Log.d("Request.resp", response);
+				try {
+					JSONObject result = new JSONObject(response);
+					onSuccess(result);
+				} catch (JSONException e) {
+					Log.e("Request.parseError", e.getMessage(), e);
+					onError(e);
+				}
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError e) {
+				onConnectionError(e);
+			}
+		}) {
+			@Override
+			public Map<String, String> getHeaders() {
+				Map<String, String> headers = new HashMap<>();
+				if (useAuth) {
+					headers.put("Authorization","Bearer " + app.getToken());
+				}
+				return headers;
+			}
+
+			@Override
+			protected Map<String, String> getParams() {
+				return bodyParams;
+			}
+
+			@Override
+			protected Map<String, DataPart> getByteData() {
+				Map<String, DataPart> params = new HashMap<>();
+				for (Map.Entry<String, String> entry : bodyFiles.entrySet()) {
+					File file = new File(entry.getValue());
+					if (file.exists()) {
+						byte[] bytes = new byte[(int) file.length()];
+						try {
+							BufferedInputStream buf = new BufferedInputStream(new FileInputStream(file));
+							if (buf.read(bytes, 0, bytes.length) > 0) {
+								params.put(entry.getKey(), new DataPart(file.getName(), bytes, "image/jpeg"));
+							}
+							buf.close();
+						} catch (Exception e) {
+							Log.e("Request.addFile", e.getMessage(), e);
+						}
+					}
+				}
+
+				return params;
+			}
+		};
+
 		queue.add(req);
 	}
 

@@ -1,131 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/transparent"
-    android:layout_marginBottom="@dimen/activity_horizontal_margin">
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@color/transparent"
+	android:layout_marginBottom="@dimen/activity_horizontal_margin">
 
-    <LinearLayout
-        android:id="@+id/titleHeaderLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+	<LinearLayout
+		android:id="@+id/titleHeaderLayout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@drawable/rounded_text_view_top"
+		android:gravity="center"
+		android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/acceptedTitleTextView"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="2dp"
-            android:layout_weight="45"
-            android:background="@drawable/rounded_green_text_view_left_top"
-            android:ellipsize="end"
-            android:gravity="center_vertical"
-            android:lines="1"
-            android:paddingBottom="8dp"
-            android:paddingStart="@dimen/activity_horizontal_margin"
-            android:paddingTop="8dp"
-            android:text="Processed"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_large"
-            android:textStyle="bold" />
+		<TextView
+			android:id="@+id/acceptedTitleTextView"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_marginTop="2dp"
+			android:layout_weight="45"
+			android:ellipsize="end"
+			android:gravity="center_vertical"
+			android:lines="1"
+			android:paddingBottom="8dp"
+			android:paddingStart="@dimen/activity_horizontal_margin"
+			android:paddingEnd="@dimen/activity_horizontal_margin"
+			android:paddingTop="8dp"
+			android:text="@string/accepted"
+			android:textSize="@dimen/text_size_large"
+			android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/inWorkApplicationItemDateTextView"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="2dp"
-            android:layout_weight="25"
-            android:background="@drawable/rounded_green_text_view_right_top"
-            android:drawablePadding="8dp"
-            android:drawableStart="@drawable/ic_calendar_white_16dp"
-            android:gravity="center_vertical"
-            android:lines="1"
-            android:paddingBottom="8dp"
-            android:paddingEnd="@dimen/half_default_size"
-            android:paddingStart="@dimen/half_default_size"
-            android:paddingTop="8dp"
-            android:text="20.12.17"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_large" />
-    </LinearLayout>
+		<TextView
+			android:id="@+id/dateTextView"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_marginTop="2dp"
+			android:layout_weight="25"
+			android:drawablePadding="8dp"
+			android:drawableStart="@drawable/ic_calendar_gray_16dp"
+			android:gravity="center_vertical"
+			android:lines="1"
+			android:paddingBottom="8dp"
+			android:paddingEnd="@dimen/half_default_size"
+			android:paddingStart="@dimen/half_default_size"
+			android:paddingTop="8dp"
+			android:textSize="@dimen/text_size_large" />
 
-    <LinearLayout
-        android:id="@+id/infoLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/titleHeaderLayout"
-        android:background="@color/white"
-        android:orientation="vertical">
+	</LinearLayout>
 
-        <TextView
-            android:id="@+id/appIdTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="8dp"
-            android:text="ID 55577789" />
+	<LinearLayout
+		android:id="@+id/infoLayout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/titleHeaderLayout"
+		android:background="@drawable/rounded_bottom_layout_white"
+		android:orientation="vertical"
+		android:paddingBottom="8dp">
 
-        <TextView
-            android:id="@+id/titleItemTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:background="@color/white"
-            android:text="@string/fake_string_item_header"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_extra_large_20"
-            android:textStyle="bold" />
+		<TextView
+			android:id="@+id/appIdTextView"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/activity_horizontal_margin"
+			android:layout_marginTop="8dp" />
 
-        <TextView
-            android:id="@+id/descriptionItemTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/titleItemTextView"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/white"
-            android:paddingBottom="8dp"
-            android:paddingEnd="@dimen/activity_horizontal_margin"
-            android:text="@string/fake_string_description" />
+		<TextView
+			android:id="@+id/titleItemTextView"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/activity_horizontal_margin"
+			android:layout_marginStart="@dimen/activity_horizontal_margin"
+			android:layout_marginTop="@dimen/activity_vertical_margin"
+			android:background="@color/white"
+			android:textColor="@color/black"
+			android:textSize="@dimen/text_size_extra_large_20"
+			android:textStyle="bold" />
 
-    </LinearLayout>
+		<TextView
+			android:id="@+id/descriptionItemTextView"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="16dp"
+			android:layout_marginStart="16dp"
+			android:layout_marginTop="8dp"
+			android:background="@color/white"
+			android:paddingEnd="@dimen/activity_horizontal_margin"
+			android:paddingStart="@dimen/activity_horizontal_margin" />
 
-    <LinearLayout
-        android:id="@+id/timerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/infoLayout"
-        android:background="@drawable/rounded_layout_bottom_gray"
-        android:orientation="horizontal"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp">
-
-        <TextView
-            android:id="@+id/timerTitleTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_weight="3"
-            android:text="@string/time_to_send_title"
-            android:textSize="@dimen/text_size_large" />
-
-        <TextView
-            android:id="@+id/timerTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="18:17"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_extra_large_30"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+	</LinearLayout>
 
 </RelativeLayout>

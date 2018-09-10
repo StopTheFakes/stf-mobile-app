@@ -1,376 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background">
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/background">
 
-    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        style="@style/scrollbar_style"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottomNavigation"
-        android:background="@drawable/main_background"
-        android:fadeScrollbars="false"
-        android:paddingEnd="4dp"
-        android:scrollbars="vertical"
-        android:verticalScrollbarPosition="right">
+	<android.support.v4.widget.NestedScrollView
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		style="@style/scrollbar_style"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_above="@+id/bottomNavigation"
+		android:background="@drawable/main_background"
+		android:fadeScrollbars="false"
+		android:paddingEnd="4dp"
+		android:scrollbars="vertical"
+		android:verticalScrollbarPosition="right"
+		tools:ignore="RtlSymmetry">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_vertical_margin">
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="@dimen/activity_vertical_margin">
 
-            <RelativeLayout
-                android:id="@+id/availableLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_top_white"
-                android:paddingBottom="@dimen/activity_vertical_margin">
+			<RelativeLayout
+				android:id="@+id/availableLayout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="@drawable/rounded_top_white"
+				android:paddingBottom="@dimen/activity_vertical_margin">
 
-                <TextView
-                    android:id="@+id/availableTitleTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="@dimen/activity_vertical_margin"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:drawablePadding="@dimen/activity_vertical_margin"
-                    android:drawableStart="@drawable/ic_savings_box"
-                    android:gravity="center_vertical"
-                    android:text="@string/funds_available"
-                    android:textColor="@color/textColorPrimary"
-                    android:textSize="@dimen/text_size_extra_large_20"
-                    android:textStyle="bold" />
+				<TextView
+					android:id="@+id/availableTitleTextView"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentStart="true"
+					android:layout_marginStart="@dimen/activity_vertical_margin"
+					android:layout_marginTop="@dimen/activity_vertical_margin"
+					android:drawablePadding="@dimen/activity_vertical_margin"
+					android:drawableStart="@drawable/ic_savings_box"
+					android:gravity="center_vertical"
+					android:text="@string/funds_available"
+					android:textColor="@color/textColorPrimary"
+					android:textSize="@dimen/text_size_extra_large_20"
+					android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/stfTExtView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/availableTitleTextView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="@dimen/text_size_extra_large_20"
-                    android:layout_marginTop="@dimen/text_size_extra_large_20"
-                    android:layout_toEndOf="@+id/availableTitleTextView"
-                    android:gravity="center_vertical|end"
-                    android:text="120 STF"
-                    android:textSize="@dimen/text_size_extra_large_20" />
+				<TextView
+					android:id="@+id/balanceTextView"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_alignBaseline="@+id/availableTitleTextView"
+					android:layout_alignParentEnd="true"
+					android:layout_marginEnd="@dimen/text_size_extra_large_20"
+					android:layout_marginTop="@dimen/text_size_extra_large_20"
+					android:layout_toEndOf="@+id/availableTitleTextView"
+					android:gravity="center_vertical|end"
+					android:textSize="@dimen/text_size_extra_large_20" />
 
-            </RelativeLayout>
+			</RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/addressLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/availableLayout"
-                android:background="@color/application_inactive">
+			<RelativeLayout
+				android:id="@+id/addressLayout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_below="@+id/availableLayout"
+				android:background="@color/application_inactive">
 
-                <EditText
-                    android:id="@+id/addressEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/rounded_edit_text_white"
-                    android:hint="Provide your wallet number"
-                    android:inputType="textWebEditText"
-                    android:maxLines="1"
-                    android:paddingEnd="@dimen/activity_horizontal_margin"
-                    android:paddingStart="@dimen/activity_horizontal_margin"
-                    android:textColor="@color/textColorSecondary"
-                    android:textCursorDrawable="@null" />
+				<EditText
+					android:id="@+id/addressEditText"
+					android:layout_width="match_parent"
+					android:layout_height="60dp"
+					android:layout_marginEnd="@dimen/activity_horizontal_margin"
+					android:layout_marginStart="@dimen/activity_horizontal_margin"
+					android:layout_marginTop="8dp"
+					android:background="@drawable/rounded_edit_text_white"
+					android:hint="@string/provide_your_wallet_number"
+					android:inputType="textWebEditText"
+					android:maxLines="1"
+					android:paddingEnd="@dimen/activity_horizontal_margin"
+					android:paddingStart="@dimen/activity_horizontal_margin"
+					android:textColor="@color/textColorSecondary"
+					android:textCursorDrawable="@null" />
 
-                <EditText
-                    android:id="@+id/sumEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/addressEditText"
-                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:layout_marginTop="8dp"
-                    android:layout_toStartOf="@+id/palyoutButton"
-                    android:background="@drawable/rounded_edit_text_white"
-                    android:hint="Enter the amount"
-                    android:inputType="textWebEditText"
-                    android:maxLines="1"
-                    android:paddingEnd="@dimen/half_default_size"
-                    android:paddingStart="@dimen/half_default_size"
-                    android:textColor="@color/textColorSecondary"
-                    android:textCursorDrawable="@null" />
+				<EditText
+					android:id="@+id/sumEditText"
+					android:layout_width="match_parent"
+					android:layout_height="60dp"
+					android:layout_alignParentStart="true"
+					android:layout_below="@+id/addressEditText"
+					android:layout_marginEnd="@dimen/activity_horizontal_margin"
+					android:layout_marginStart="@dimen/activity_horizontal_margin"
+					android:layout_marginTop="8dp"
+					android:layout_toStartOf="@+id/palyoutButton"
+					android:background="@drawable/rounded_edit_text_white"
+					android:hint="@string/enter_the_amount"
+					android:inputType="textWebEditText"
+					android:maxLines="1"
+					android:paddingEnd="@dimen/half_default_size"
+					android:paddingStart="@dimen/half_default_size"
+					android:textColor="@color/textColorSecondary"
+					android:textCursorDrawable="@null" />
 
-                <Button
-                    android:id="@+id/palyoutButton"
-                    android:layout_width="120dp"
-                    android:layout_height="60dp"
-                    android:layout_alignBottom="@id/sumEditText"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignTop="@+id/sumEditText"
-                    android:layout_below="@+id/addressEditText"
-                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:background="@drawable/rounded_send_signal_button"
-                    android:text="Withdraw funds"
-                    android:textAllCaps="false"
-                    android:textColor="@color/textWhiteColorPrimary"
-                    android:textSize="14sp" />
+				<Button
+					android:id="@+id/palyoutButton"
+					android:layout_width="120dp"
+					android:layout_height="60dp"
+					android:layout_alignBottom="@id/sumEditText"
+					android:layout_alignParentEnd="true"
+					android:layout_alignTop="@+id/sumEditText"
+					android:layout_below="@+id/addressEditText"
+					android:layout_marginEnd="@dimen/activity_horizontal_margin"
+					android:layout_marginStart="@dimen/activity_horizontal_margin"
+					android:background="@drawable/rounded_send_signal_button"
+					android:text="@string/withdraw_funds"
+					android:textAllCaps="false"
+					android:textColor="@color/textWhiteColorPrimary"
+					android:textSize="14sp" />
 
+				<View
+					android:id="@+id/divider"
+					android:layout_width="match_parent"
+					android:layout_height="1dp"
+					android:layout_below="@+id/sumEditText"
+					android:layout_marginEnd="@dimen/activity_horizontal_margin"
+					android:layout_marginStart="@dimen/activity_horizontal_margin"
+					android:layout_marginTop="32dp"
+					android:background="@color/recycler_divider" />
 
-                <View
-                    android:id="@+id/divider"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/sumEditText"
-                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:layout_marginTop="32dp"
-                    android:background="@color/recycler_divider" />
+			</RelativeLayout>
 
-            </RelativeLayout>
+			<LinearLayout
+				android:id="@+id/historyItemsLayout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_below="@+id/addressLayout"
+				android:layout_marginBottom="32dp"
+				android:background="@drawable/rounded_layout_bottom_gray"
+				android:orientation="vertical">
+			</LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/historyItemsLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/addressLayout"
-                android:layout_marginBottom="32dp"
-                android:background="@drawable/rounded_layout_bottom_gray"
-                android:orientation="vertical">
+		</RelativeLayout>
 
-                <TextView
-                    android:id="@+id/date1TextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/application_inactive"
-                    android:drawablePadding="8dp"
-                    android:drawableStart="@drawable/ic_calendar_gray_16dp"
-                    android:paddingBottom="4dp"
-                    android:paddingStart="16dp"
-                    android:paddingTop="8dp"
-                    android:text="24 November 2017"
-                    android:textColor="@color/textColorPrimary"
-                    android:textSize="@dimen/text_size_large"
-                    android:textStyle="bold" />
+	</android.support.v4.widget.NestedScrollView>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:background="@color/white"
-                    android:paddingBottom="@dimen/half_default_size"
-                    android:paddingTop="@dimen/half_default_size">
-
-                    <TextView
-                        android:layout_width="240dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="@dimen/default_size"
-                        android:layout_marginStart="@dimen/activity_vertical_margin"
-                        android:padding="4dp"
-                        android:text="Receipt of funds for the Alert ID 672223 following the Request 736-3847" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="@dimen/activity_vertical_margin"
-                        android:text="+16 STF"
-                        android:textColor="@color/send_signal_button" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/activity_vertical_margin"
-                        android:layout_marginTop="2dp"
-                        android:gravity="end"
-                        android:text="07:52 PM"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"/>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="60dp"
-                    android:layout_marginBottom="4dp"
-                    android:background="@color/white"
-                    android:paddingBottom="@dimen/half_default_size"
-                    android:paddingTop="@dimen/half_default_size">
-
-                    <TextView
-                        android:layout_width="240dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="@dimen/default_size"
-                        android:layout_marginStart="@dimen/activity_vertical_margin"
-                        android:padding="4dp"
-                        android:text="Funds withdrawal" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="@dimen/activity_vertical_margin"
-                        android:text="-100 STF"
-                        android:textColor="@color/send_signal_button" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/activity_vertical_margin"
-                        android:layout_marginTop="2dp"
-                        android:gravity="end"
-                        android:text="10:12 PM"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"/>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:background="@color/white"
-                    android:paddingBottom="@dimen/half_default_size"
-                    android:paddingTop="@dimen/half_default_size">
-
-                    <TextView
-                        android:layout_width="240dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="@dimen/default_size"
-                        android:layout_marginStart="@dimen/activity_vertical_margin"
-                        android:padding="4dp"
-                        android:text="Receipt of funds for the Alert ID 672193 following the Request 736-3845" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="@dimen/activity_vertical_margin"
-                        android:text="+24 STF"
-                        android:textColor="@color/send_signal_button" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/activity_vertical_margin"
-                        android:layout_marginTop="2dp"
-                        android:gravity="end"
-                        android:text="11:43 PM"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"/>
-
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/date2TextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/application_inactive"
-                    android:drawablePadding="8dp"
-                    android:drawableStart="@drawable/ic_calendar_gray_16dp"
-                    android:padding="4dp"
-                    android:paddingBottom="4dp"
-                    android:paddingStart="16dp"
-                    android:paddingTop="8dp"
-                    android:text="25 November 2017"
-                    android:textColor="@color/textColorPrimary"
-                    android:textSize="@dimen/text_size_large"
-                    android:textStyle="bold" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:background="@color/white"
-                    android:paddingBottom="@dimen/half_default_size"
-                    android:paddingTop="@dimen/half_default_size">
-
-                    <TextView
-                        android:layout_width="240dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="@dimen/default_size"
-                        android:layout_marginStart="@dimen/activity_vertical_margin"
-                        android:padding="4dp"
-                        android:text="Receipt of funds for the Alert ID 672223 following the Request 736-3247" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="@dimen/activity_vertical_margin"
-                        android:text="+19 STF"
-                        android:textColor="@color/send_signal_button" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/activity_vertical_margin"
-                        android:layout_marginTop="2dp"
-                        android:gravity="end"
-                        android:text="09:52 AM"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"/>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/item1Layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:background="@drawable/rounded_bottom_white"
-                    android:paddingBottom="@dimen/half_default_size"
-                    android:paddingTop="@dimen/half_default_size">
-
-                    <TextView
-                        android:layout_width="240dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="@dimen/default_size"
-                        android:layout_marginStart="@dimen/activity_vertical_margin"
-                        android:padding="4dp"
-                        android:text="Receipt of funds for the Alert ID 672193 following the Request 736-3145" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="@dimen/activity_vertical_margin"
-                        android:text="+20 STF"
-                        android:textColor="@color/send_signal_button" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/activity_vertical_margin"
-                        android:layout_marginTop="2dp"
-                        android:gravity="end"
-                        android:text="11:43 AM"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"/>
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-    </android.support.v4.widget.NestedScrollView>
-
-    <include
-        android:id="@+id/bottomNavigation"
-        layout="@layout/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true" />
+	<include
+		android:id="@+id/bottomNavigation"
+		layout="@layout/bottom_navigation"
+		android:layout_width="match_parent"
+		android:layout_height="60dp"
+		android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

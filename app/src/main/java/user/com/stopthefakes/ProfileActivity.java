@@ -84,6 +84,9 @@ public class ProfileActivity extends BaseActivity {
 	@BindView(R.id.passwordNewView)
 	EditText passwordNewView;
 
+	@BindView(R.id.paymentTextView)
+	EditText paymentTextView;
+
 	private ArrayAdapter<City> cityAdapter;
 	private String currentCountry;
 	private String currentCity;
@@ -200,6 +203,9 @@ public class ProfileActivity extends BaseActivity {
 		String email      = emailTextView.getText().toString();
 		String annotation = annotationTextView.getText().toString();
 		String notify     = "0";
+		String payment    = paymentTextView.getText().toString();
+
+		Integer paymentAmount = 0;
 
 		String oldPassword = passwordCurrentView.getText().toString();
 		String newPassword = passwordNewView.getText().toString();
@@ -214,6 +220,20 @@ public class ProfileActivity extends BaseActivity {
 			}
 			if (newPassword.length() == 0) {
 				passwordNewView.setError("Enter new password");
+				return;
+			}
+		}
+
+		if (payment.length() > 0) {
+			try {
+				paymentAmount = Integer.parseInt(payment);
+				if (paymentAmount <= 0) {
+					paymentTextView.setError("Enter payment amount");
+					return;
+				}
+			} catch (Exception e) {
+				Log.e("profile.save", e.getMessage(), e);
+				paymentTextView.setError("Enter payment amount");
 				return;
 			}
 		}
@@ -240,6 +260,7 @@ public class ProfileActivity extends BaseActivity {
 						app.toast(R.string.profile_saved);
 						passwordCurrentView.setText("");
 						passwordNewView.setText("");
+						paymentTextView.setText("");
 						app.reloadCurrentUser(new RequestCallback() {
 							public void onSuccess() {}
 							public void onError(Exception e) {}
@@ -266,6 +287,7 @@ public class ProfileActivity extends BaseActivity {
 		req.addBodyParam("email",        email);
 		req.addBodyParam("password_old", oldPassword);
 		req.addBodyParam("password_new", newPassword);
+		req.addBodyParam("payment",      paymentAmount > 0 ? Integer.toString(paymentAmount) : "");
 
 		req.process(app);
 	}

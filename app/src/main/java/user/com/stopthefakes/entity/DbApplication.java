@@ -1,7 +1,13 @@
 package user.com.stopthefakes.entity;
 
+import android.util.Log;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 public class DbApplication {
@@ -14,11 +20,12 @@ public class DbApplication {
 	private String country = "";
 	private String description = "";
 	private String rightToUser = "";
-	private String tipes = "";
+	private String tips = "";
 	private String date = "";
 	private int type = 0;
 	private int allType = 0;
 	private int expires = 0;
+	private String expiresString = "";
 	private String shordDescription = "";
 	private String[] alerts = new String[]{};
 	private int[] images = new int[]{};
@@ -173,18 +180,28 @@ public class DbApplication {
 	}
 
 
-	public String getTipes() {
-		return tipes;
+	public String getTips() {
+		return tips;
 	}
 
 
-	public void setTipes(String tipes) {
-		this.tipes = tipes;
+	public void setTips(String tips) {
+		this.tips = tips;
 	}
 
 
 	public void setExpires(int expires) {
 		this.expires = expires;
+	}
+
+
+	public void setExpiresString(String expires) {
+		this.expiresString = expires;
+	}
+
+
+	public String getExpiresString() {
+		return this.expiresString;
 	}
 
 
@@ -262,7 +279,30 @@ public class DbApplication {
 			int minutes = (expires - hours * 60 * 60) / 60;
 			return hours + ":" + minutes;
 		}
-		return null;
+		return "";
+	}
+
+
+	public String getTimeLeftFromExpiresString() {
+		int curSecs = (int) (new Date().getTime() / 1000);
+		DateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+		String src = getExpiresString();
+		if (src.length() > 0) {
+			try {
+				Date dateParsed = sourceFormat.parse(src);
+				int secsTo = (int) (dateParsed.getTime() / 1000);
+				if (secsTo < curSecs) {
+					return "00:00";
+				}
+				int delta = secsTo - curSecs;
+				int hours = delta / 60 / 60;
+				int minutes = (delta - hours * 60 * 60) / 60;
+				return hours + ":" + minutes;
+			} catch (Exception e) {
+				Log.e("Parse date", e.getMessage(), e);
+			}
+		}
+		return "";
 	}
 
 

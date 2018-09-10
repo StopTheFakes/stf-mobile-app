@@ -1,7 +1,9 @@
 package user.com.stopthefakes.ui.gallery;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
@@ -9,6 +11,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -26,9 +30,12 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import user.com.stopthefakes.App;
+import user.com.stopthefakes.AuthorizationActivity;
 import user.com.stopthefakes.BaseActivity;
 import user.com.stopthefakes.R;
 import user.com.stopthefakes.ui.offender.OffenderActivity;
+import user.com.stopthefakes.utils.StringUtil;
 
 
 public class GalleryMainActivity extends BaseActivity {
@@ -77,6 +84,10 @@ public class GalleryMainActivity extends BaseActivity {
 
 	int selectedCamera = -1;
 
+	private Integer idClaim;
+
+	Boolean inProgress = false;
+
 	Camera camera = null;
 	MediaRecorder mediaRecorder;
 	boolean clickStart = false;
@@ -112,16 +123,37 @@ public class GalleryMainActivity extends BaseActivity {
 		setContentView(R.layout.activity_gallery_main);
 		setUnbinder(ButterKnife.bind(this));
 
-		int id = getIntent().getIntExtra("id", -1);
+		if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+			|| ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+			|| ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
+			|| ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+			ActivityCompat.requestPermissions(this, new String[]{
+				Manifest.permission.WRITE_EXTERNAL_STORAGE,
+				Manifest.permission.READ_EXTERNAL_STORAGE,
+				Manifest.permission.CAMERA,
+				Manifest.permission.RECORD_AUDIO,
+				Manifest.permission.INTERNET
+			}, 100);
+		}
 
-		if (id == -1) {
+		App app = App.getApp();
+		String token = app.getToken();
+
+		if (token.equals("")) {
+			startActivity(new Intent(this, AuthorizationActivity.class));
+			return;
+		}
+
+		idClaim = getIntent().getIntExtra("id", -1);
+
+		if (idClaim == -1) {
 			onBackPressed();
 			return;
 		}
 
 		startPreview();
 
-		if (id % 2 == 0) {
+		if (idClaim % 2 == 0) {
 			onMakePhoto();
 		} else {
 			onMakeVideo();
@@ -185,7 +217,10 @@ public class GalleryMainActivity extends BaseActivity {
 
 	@OnClick(R.id.sendSignalButton)
 	public void clickSendSignal() {
-		startActivity(new Intent(this, OffenderActivity.class));
+		Intent intent = new Intent(this, OffenderActivity.class);
+		intent.putExtra("id", idClaim);
+		intent.putExtra("files", TextUtils.join("||", mImageContainer.mPaths));
+		startActivity(intent);
 	}
 
 
@@ -218,11 +253,16 @@ public class GalleryMainActivity extends BaseActivity {
 	@OnClick(R.id.surfaceView)
 	public void clickSufrace() {
 		if (selectedCamera == PHOTO) {
+			if (inProgress) {
+				return;
+			}
+			inProgress = true;
 			camera.takePicture(null, null, new Camera.PictureCallback() {
 				@Override
 				public void onPictureTaken(byte[] data, Camera camera) {
 					try {
 						File path = generateFile(PHOTO);
+						Log.i("FileCreated", path.getAbsolutePath());
 						FileOutputStream fos = new FileOutputStream(path);
 						fos.write(data);
 						fos.close();
@@ -241,6 +281,7 @@ public class GalleryMainActivity extends BaseActivity {
 					} catch (Exception e) {
 						Log.e("GalleryAct", e.getMessage(), e);
 					}
+					inProgress = false;
 				}
 			});
 		} else {
@@ -282,9 +323,11 @@ public class GalleryMainActivity extends BaseActivity {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		camera.stopPreview();
-		camera.release();
-		camera = null;
+		if (camera != null) {
+			camera.stopPreview();
+			camera.release();
+			camera = null;
+		}
 	}
 
 
@@ -343,9 +386,14 @@ public class GalleryMainActivity extends BaseActivity {
 
 
 	private void createDirectory() {
-		directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "MyFolder");
+		directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "stf");
 		if (!directory.exists()) {
-			directory.mkdirs();
+			if (directory.mkdir()) {
+				Log.i("createDirectory", "Directory created");
+			} else {
+				Log.e("createDirectory", "Fail create directory: " + directory.getAbsolutePath() +
+					", storage state: " + Environment.getExternalStorageState());
+			}
 		}
 	}
 

@@ -3,13 +3,20 @@ package user.com.stopthefakes.ui.application.all;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import user.com.stopthefakes.App;
 import user.com.stopthefakes.R;
 import user.com.stopthefakes.adaper.BaseRecyclerAdapter;
 import user.com.stopthefakes.entity.DbApplication;
@@ -71,10 +78,15 @@ public class AppsAdapter extends BaseRecyclerAdapter<DbApplication, RecyclerView
 
 		@BindView(R.id.appIdTextView)
 		TextView appIdTextView;
+
 		@BindView(R.id.titleItemTextView)
 		TextView titleItemTextView;
+
 		@BindView(R.id.descriptionItemTextView)
 		TextView descriptionItemTextView;
+
+		@BindView(R.id.dateTextView)
+		TextView dateTextView;
 
 
 		AcceptedViewHolder(View itemView) {
@@ -84,8 +96,18 @@ public class AppsAdapter extends BaseRecyclerAdapter<DbApplication, RecyclerView
 
 
 		void bindView(DbApplication dbApp) {
+			appIdTextView.setText(String.format(App.getApp().getString(R.string.alert_id), dbApp.getId()));
 			titleItemTextView.setText(dbApp.getHeader());
 			descriptionItemTextView.setText(dbApp.getShordDescription());
+			DateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+			DateFormat dateFormat = new SimpleDateFormat("dd.MM.yy", Locale.ENGLISH);
+			try {
+				Date dateParsed = sourceFormat.parse(dbApp.getExpiresString());
+				dateTextView.setText(dateFormat.format(dateParsed));
+			} catch (Exception e) {
+				dateTextView.setText("--.--.--");
+				Log.e("Parse date", e.getMessage(), e);
+			}
 		}
 	}
 
@@ -94,10 +116,15 @@ public class AppsAdapter extends BaseRecyclerAdapter<DbApplication, RecyclerView
 
 		@BindView(R.id.appIdTextView)
 		TextView appIdTextView;
+
 		@BindView(R.id.titleItemTextView)
 		TextView titleItemTextView;
+
 		@BindView(R.id.descriptionItemTextView)
 		TextView descriptionItemTextView;
+
+		@BindView(R.id.dateTextView)
+		TextView dateTextView;
 
 
 		CancelledViewHolder(View itemView) {
@@ -107,8 +134,18 @@ public class AppsAdapter extends BaseRecyclerAdapter<DbApplication, RecyclerView
 
 
 		void bindView(DbApplication dbApp) {
+			appIdTextView.setText(String.format(App.getApp().getString(R.string.alert_id), dbApp.getId()));
 			titleItemTextView.setText(dbApp.getHeader());
 			descriptionItemTextView.setText(dbApp.getShordDescription());
+			DateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+			DateFormat dateFormat = new SimpleDateFormat("dd.MM.yy", Locale.ENGLISH);
+			try {
+				Date dateParsed = sourceFormat.parse(dbApp.getExpiresString());
+				dateTextView.setText(dateFormat.format(dateParsed));
+			} catch (Exception e) {
+				dateTextView.setText("--.--.--");
+				Log.e("Parse date", e.getMessage(), e);
+			}
 		}
 	}
 
@@ -117,10 +154,18 @@ public class AppsAdapter extends BaseRecyclerAdapter<DbApplication, RecyclerView
 
 		@BindView(R.id.appIdTextView)
 		TextView appIdTextView;
+
 		@BindView(R.id.titleItemTextView)
 		TextView titleItemTextView;
+
 		@BindView(R.id.descriptionItemTextView)
 		TextView descriptionItemTextView;
+
+		@BindView(R.id.dateTextView)
+		TextView dateTextView;
+
+		@BindView(R.id.timerTextView)
+		TextView timerTextView;
 
 
 		OnWatchingViewHolder(View itemView) {
@@ -130,8 +175,19 @@ public class AppsAdapter extends BaseRecyclerAdapter<DbApplication, RecyclerView
 
 
 		void bindView(DbApplication dbApp) {
+			appIdTextView.setText(String.format(App.getApp().getString(R.string.alert_id), dbApp.getId()));
 			titleItemTextView.setText(dbApp.getHeader());
 			descriptionItemTextView.setText(dbApp.getShordDescription());
+			DateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+			DateFormat dateFormat = new SimpleDateFormat("dd.MM.yy", Locale.ENGLISH);
+			try {
+				Date dateParsed = sourceFormat.parse(dbApp.getExpiresString());
+				dateTextView.setText(dateFormat.format(dateParsed));
+			} catch (Exception e) {
+				dateTextView.setText("--.--.--");
+				Log.e("Parse date", e.getMessage(), e);
+			}
+			timerTextView.setText(dbApp.getTimeLeftFromExpiresString());
 		}
 	}
 

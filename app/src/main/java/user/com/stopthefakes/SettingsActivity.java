@@ -100,7 +100,7 @@ public class SettingsActivity extends BaseActivity {
 
 	@OnClick(R.id.sendSignalNavigationButton)
 	public void openSignals(){
-		startActivity(SendSignalPageActivity.newInstance(this));
+		startActivity(AllSignalsActivity.newInstance(this));
 	}
 
 

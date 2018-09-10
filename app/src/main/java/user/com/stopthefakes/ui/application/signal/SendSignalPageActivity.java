@@ -23,6 +23,7 @@ import user.com.stopthefakes.BaseActivity;
 import user.com.stopthefakes.R;
 import user.com.stopthefakes.SettingsActivity;
 import user.com.stopthefakes.entity.DbApplication;
+import user.com.stopthefakes.ui.application.all.AllSignalsActivity;
 import user.com.stopthefakes.ui.application.applications.InWorkApplicationActivity;
 import user.com.stopthefakes.ui.application.list.ApplicationsAdapter;
 import user.com.stopthefakes.ui.application.list.ApplicationsListActivity;
@@ -97,7 +98,7 @@ public class SendSignalPageActivity extends BaseActivity implements Applications
 
     @OnClick(R.id.sendSignalNavigationButton)
     public void openSignals(){
-        startActivity(SendSignalPageActivity.newInstance(this));
+        startActivity(AllSignalsActivity.newInstance(this));
     }
 
     @OnClick(R.id.goToMenuPageButton)
