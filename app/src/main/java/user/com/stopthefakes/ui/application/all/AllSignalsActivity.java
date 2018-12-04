@@ -3,6 +3,7 @@ package user.com.stopthefakes.ui.application.all;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,12 +13,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +34,8 @@ public class AllSignalsActivity extends BaseActivity {
 	RecyclerView appsRecyclerView;
 
 	private AppsAdapter appsAdapter;
+	private int filterType = 0;
+	private final Handler handler = new Handler();
 
 
 	public static Intent newInstance(Context context) {
@@ -52,6 +51,18 @@ public class AllSignalsActivity extends BaseActivity {
 
 		initRecyclerView();
 		initAdapter();
+		autoRefresh();
+	}
+
+
+	private void autoRefresh() {
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				reloadList();
+				autoRefresh();
+			}
+		}, 5000);
 	}
 
 
@@ -78,34 +89,38 @@ public class AllSignalsActivity extends BaseActivity {
 
 	@OnClick(R.id.acceptedTextView)
 	public void onAcceptedClicked() {
-		reloadList(1);
+		filterType = 1;
+		reloadList();
 	}
 
 
 	@OnClick(R.id.cancelledTextView)
 	public void onCancelledClicked() {
-		reloadList(2);
+		filterType = 2;
+		reloadList();
 	}
 
 
 	@OnClick(R.id.onWatchingTextView)
 	public void onWatchingClicked() {
-		reloadList(3);
+		filterType = 3;
+		reloadList();
 	}
 
 
 	@OnClick(R.id.allTextView)
 	public void onAllClicked() {
-		reloadList(0);
+		filterType = 0;
+		reloadList();
 	}
 
 
-	protected void reloadList(int type) {
+	protected void reloadList() {
 		if (appsAdapter == null) {
 			appsAdapter = new AppsAdapter();
 		}
 		String url = "";
-		switch (type) {
+		switch (filterType) {
 			case 0: url = "alerts"; break;
 			case 1: url = "alerts-processed"; break;
 			case 2: url = "alerts-declined"; break;
@@ -157,18 +172,19 @@ public class AllSignalsActivity extends BaseActivity {
 
 	@OnClick(R.id.goToMainScreenButton)
 	public void openStartPage() {
-		startActivity(ApplicationsListActivity.newInstance(this));
+		Intent intent = ApplicationsListActivity.newInstance(this);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
 	}
 
-
-	@OnClick(R.id.sendSignalNavigationButton)
-	public void openSignals(){
-		startActivity(AllSignalsActivity.newInstance(this));
-	}
 
 	@OnClick(R.id.goToMenuPageButton)
 	protected void openSettings() {
-		startActivity(new Intent(this, SettingsActivity.class));
+		Intent intent = new Intent(this, SettingsActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
 	}
 
 }

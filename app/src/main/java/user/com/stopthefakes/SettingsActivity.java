@@ -25,7 +25,10 @@ public class SettingsActivity extends BaseActivity {
 		String token = app.getToken();
 
 		if (token.equals("")) {
-			startActivity(new Intent(this, AuthorizationActivity.class));
+			Intent intent = new Intent(this, AuthorizationActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+			finish();
 			return;
 		}
 
@@ -39,32 +42,47 @@ public class SettingsActivity extends BaseActivity {
 		super.onResume();
 		String token = App.getApp().getToken();
 		if (token.equals("")) {
-			startActivity(new Intent(this, AuthorizationActivity.class));
+			Intent intent = new Intent(this, AuthorizationActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+			finish();
 		}
 	}
 
 
 	@OnClick(R.id.settings)
 	protected void onClickSetting() {
-		startActivity(new Intent(this, ProfileActivity.class));
+		Intent intent = new Intent(this, ProfileActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
 	}
 
 
 	@OnClick(R.id.balance)
 	protected void onClickBalance() {
-		startActivity(new Intent(this, FinanceHistoryActivity.class));
+		Intent intent = new Intent(this, FinanceHistoryActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
 	}
 
 
 	@OnClick(R.id.mySignal)
 	protected void onClickSignal() {
-		startActivity(new Intent(this, AllSignalsActivity.class));
+		Intent intent = new Intent(this, AllSignalsActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
 	}
 
 
 	@OnClick(R.id.messages)
-	protected void onClickMessages(){
-		startActivity(new Intent(this, ChatActivity.class));
+	protected void onClickMessages() {
+		Intent intent = new Intent(this, ChatActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
 	}
 
 
@@ -94,25 +112,28 @@ public class SettingsActivity extends BaseActivity {
 
 	@OnClick(R.id.goToMainScreenButton)
 	public void openStartPage() {
-		startActivity(ApplicationsListActivity.newInstance(this));
+		Intent intent = ApplicationsListActivity.newInstance(this);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
 	}
 
 
 	@OnClick(R.id.sendSignalNavigationButton)
-	public void openSignals(){
-		startActivity(AllSignalsActivity.newInstance(this));
-	}
-
-
-	@OnClick(R.id.goToMenuPageButton)
-	protected void openSettings() {
-		startActivity(new Intent(this, SettingsActivity.class));
+	public void openSignals() {
+		Intent intent = AllSignalsActivity.newInstance(this);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
 	}
 
 
 	protected void logout() {
 		App.getApp().logout();
-		startActivity(new Intent(this, AuthorizationActivity.class));
+		Intent intent = new Intent(this, AuthorizationActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
 	}
 
 }

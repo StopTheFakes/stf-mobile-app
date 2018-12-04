@@ -65,7 +65,7 @@
 
 	<!--FormattedStrings-->
 	<string name="format_city_country">%1$s, %2$s</string>
-	<string name="accepted_signal">№%1$d</string>
+	<string name="accepted_signal">#ID %1$d</string>
 	<string name="alert_id">ID %1$d</string>
 	<string name="fin_op_title_enroll">Receipt of funds for the Alert ID %1$s following the Request %2$s</string>
 	<string name="fin_op_title_withdraw">Funds withdrawal</string>
@@ -95,7 +95,7 @@
 	<string name="expired">Expired</string>
 
 	<!--API-->
-	<string name="api_base_url">http://stf.glissmedia.ru/api/</string>
+	<string name="api_base_url">https://stopthefakes.co/api/</string>
 	<string name="api_err_conn_lost">Internet connection lost</string>
 	<string name="api_err_incorrect_cred">Incorrect email or password</string>
 	<string name="api_err_server_err">Server error</string>

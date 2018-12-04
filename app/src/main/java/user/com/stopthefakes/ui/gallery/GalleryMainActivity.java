@@ -35,7 +35,6 @@ import user.com.stopthefakes.AuthorizationActivity;
 import user.com.stopthefakes.BaseActivity;
 import user.com.stopthefakes.R;
 import user.com.stopthefakes.ui.offender.OffenderActivity;
-import user.com.stopthefakes.utils.StringUtil;
 
 
 public class GalleryMainActivity extends BaseActivity {
@@ -140,7 +139,10 @@ public class GalleryMainActivity extends BaseActivity {
 		String token = app.getToken();
 
 		if (token.equals("")) {
-			startActivity(new Intent(this, AuthorizationActivity.class));
+			Intent intent = new Intent(this, AuthorizationActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+			finish();
 			return;
 		}
 
@@ -153,11 +155,7 @@ public class GalleryMainActivity extends BaseActivity {
 
 		startPreview();
 
-		if (idClaim % 2 == 0) {
-			onMakePhoto();
-		} else {
-			onMakeVideo();
-		}
+		onMakePhoto();
 
 		mImageContainer.setClickListener(new CustomImageContainer.IClickListener() {
 			@Override
@@ -218,9 +216,11 @@ public class GalleryMainActivity extends BaseActivity {
 	@OnClick(R.id.sendSignalButton)
 	public void clickSendSignal() {
 		Intent intent = new Intent(this, OffenderActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 		intent.putExtra("id", idClaim);
 		intent.putExtra("files", TextUtils.join("||", mImageContainer.mPaths));
 		startActivity(intent);
+		finish();
 	}
 
 
@@ -400,6 +400,9 @@ public class GalleryMainActivity extends BaseActivity {
 
 	private void startPreview() {
 		camera = Camera.open();
+		Camera.Parameters params = camera.getParameters();
+		params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+		camera.setParameters(params);
 		camera.setDisplayOrientation(90);
 		SurfaceHolder mHolder = surfaceView.getHolder();
 		mHolder.addCallback(new SurfaceHolder.Callback() {

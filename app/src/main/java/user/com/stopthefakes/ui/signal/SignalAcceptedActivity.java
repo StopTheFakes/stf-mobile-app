@@ -40,7 +40,10 @@ public class SignalAcceptedActivity extends BaseActivity {
 		String token = app.getToken();
 
 		if (token.equals("")) {
-			startActivity(new Intent(this, AuthorizationActivity.class));
+			Intent intent = new Intent(this, AuthorizationActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+			finish();
 			return;
 		}
 
@@ -58,19 +61,28 @@ public class SignalAcceptedActivity extends BaseActivity {
 
 	@OnClick(R.id.closeSignalAcceptedTextView)
 	public void closeSignalAcceptedActivity() {
-		startActivity(ApplicationsListActivity.newInstance(this));
+		Intent intent = ApplicationsListActivity.newInstance(this);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
 	}
 
 
 	@OnClick(R.id.goToMainScreenButton)
 	public void openStartPage() {
-		startActivity(ApplicationsListActivity.newInstance(this));
+		Intent intent = ApplicationsListActivity.newInstance(this);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
 	}
 
 
 	@OnClick(R.id.sendSignalNavigationButton)
-	public void openSignals(){
-		startActivity(AllSignalsActivity.newInstance(this));
+	public void openSignals() {
+		Intent intent = AllSignalsActivity.newInstance(this);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
 	}
 
 }

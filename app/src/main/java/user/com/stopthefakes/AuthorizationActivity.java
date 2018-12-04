@@ -1,6 +1,7 @@
 package user.com.stopthefakes;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -180,7 +181,10 @@ public class AuthorizationActivity extends BaseActivity {
 
 
 	private void goToList() {
-		startActivity(ApplicationsListActivity.newInstance(this));
+		Intent intent = ApplicationsListActivity.newInstance(this);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
 	}
 
 }

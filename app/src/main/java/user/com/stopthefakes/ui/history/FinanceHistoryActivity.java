@@ -131,19 +131,28 @@ public class FinanceHistoryActivity extends BaseActivity {
 
 	@OnClick(R.id.goToMainScreenButton)
 	public void openStartPage() {
-		startActivity(ApplicationsListActivity.newInstance(this));
+		Intent intent = ApplicationsListActivity.newInstance(this);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
 	}
 
 
 	@OnClick(R.id.sendSignalNavigationButton)
-	public void openSignals(){
-		startActivity(AllSignalsActivity.newInstance(this));
+	public void openSignals() {
+		Intent intent = AllSignalsActivity.newInstance(this);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
 	}
 
 
 	@OnClick(R.id.goToMenuPageButton)
 	protected void openSettings() {
-		startActivity(new Intent(this, SettingsActivity.class));
+		Intent intent = new Intent(this, SettingsActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
 	}
 
 

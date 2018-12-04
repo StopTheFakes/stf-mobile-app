@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
+import android.os.Handler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,6 +51,8 @@ public class ApplicationsListActivity extends BaseActivity implements Applicatio
 
 	private ApplicationsAdapter applicationsAdapter;
 
+	private final Handler handler = new Handler();
+
 
 	public static Intent newInstance(Context context) {
 		return new Intent(context, ApplicationsListActivity.class);
@@ -66,11 +69,15 @@ public class ApplicationsListActivity extends BaseActivity implements Applicatio
 		String token = app.getToken();
 
 		if (token.equals("")) {
-			startActivity(new Intent(this, AuthorizationActivity.class));
+			Intent intent = new Intent(this, AuthorizationActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+			finish();
 		} else {
 			initRecyclerView();
 			initAdapter();
 			reloadList();
+			refreshList();
 		}
 	}
 
@@ -80,8 +87,22 @@ public class ApplicationsListActivity extends BaseActivity implements Applicatio
 		super.onResume();
 		String token = App.getApp().getToken();
 		if (token.equals("")) {
-			startActivity(new Intent(this, AuthorizationActivity.class));
+			Intent intent = new Intent(this, AuthorizationActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+			finish();
 		}
+	}
+
+
+	private void refreshList() {
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				reloadList();
+				refreshList();
+			}
+		}, 5000);
 	}
 
 
@@ -235,11 +256,20 @@ public class ApplicationsListActivity extends BaseActivity implements Applicatio
 	@Override
 	public void onApplicationClicked(DbApplication app, int pos) {
 		if (app.isWaiting()) {
-			startActivity(ApplicationActivity.newInstance(this).putExtra("id", pos));
+			Intent intent = ApplicationActivity.newInstance(this).putExtra("id", pos);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+			finish();
 		} else if (app.isTaken()) {
-			startActivity(InWorkApplicationActivity.newInstance(this).putExtra("id", pos));
+			Intent intent = InWorkApplicationActivity.newInstance(this).putExtra("id", pos);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+			finish();
 		} else if (app.isExpired()) {
-			startActivity(ExpiredApplicationActivity.newInstance(this).putExtra("id", pos));
+			Intent intent = ExpiredApplicationActivity.newInstance(this).putExtra("id", pos);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+			finish();
 		}
 	}
 
@@ -271,21 +301,21 @@ public class ApplicationsListActivity extends BaseActivity implements Applicatio
 	}
 
 
-	@OnClick(R.id.goToMainScreenButton)
-	public void openStartPage() {
-		startActivity(ApplicationsListActivity.newInstance(this));
-	}
-
-
 	@OnClick(R.id.sendSignalNavigationButton)
 	public void openSignals() {
-		startActivity(AllSignalsActivity.newInstance(this));
+		Intent intent = AllSignalsActivity.newInstance(this);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
 	}
 
 
 	@OnClick(R.id.goToMenuPageButton)
 	protected void openSettings() {
-		startActivity(new Intent(this, SettingsActivity.class));
+		Intent intent = new Intent(this, SettingsActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
 	}
 
 }

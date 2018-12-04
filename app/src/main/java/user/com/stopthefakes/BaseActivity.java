@@ -18,7 +18,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 	private Unbinder unbinder;
 
 
-	protected final void setUnbinder(Unbinder unbinder) {
+	protected final void setUnbinder(@Nullable Unbinder unbinder) {
 		this.unbinder = unbinder;
 	}
 
@@ -30,11 +30,17 @@ public abstract class BaseActivity extends AppCompatActivity {
 		String token = sharedPref.getString("token", "");
 		if (token.length() > 0) {
 			if (this instanceof AuthorizationActivity) {
-				startActivity(new Intent(this, ApplicationsListActivity.class));
+				Intent intent = new Intent(this, ApplicationsListActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+				finish();
 			}
 		} else {
 			if (!(this instanceof AuthorizationActivity)) {
-				startActivity(new Intent(this, AuthorizationActivity.class));
+				Intent intent = new Intent(this, AuthorizationActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+				finish();
 			}
 		}
 	}

@@ -5,13 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import org.json.JSONObject;
 
@@ -26,7 +26,6 @@ import user.com.stopthefakes.SettingsActivity;
 import user.com.stopthefakes.api.Request;
 import user.com.stopthefakes.ui.application.all.AllSignalsActivity;
 import user.com.stopthefakes.ui.application.list.ApplicationsListActivity;
-import user.com.stopthefakes.ui.application.signal.SendSignalPageActivity;
 import user.com.stopthefakes.ui.signal.SignalAcceptedActivity;
 import user.com.stopthefakes.utils.FieldsValidator;
 
@@ -48,6 +47,9 @@ public class OffenderActivity extends BaseActivity {
 	@BindView(R.id.sendSignalButton)
 	Button sendSignalButton;
 
+	@BindView(R.id.progressBarLayout)
+	RelativeLayout progressBarLayout;
+
 	private FieldsValidator validator;
 	private Integer idClaim;
 	private String[] pathsList;
@@ -63,7 +65,10 @@ public class OffenderActivity extends BaseActivity {
 		String token = app.getToken();
 
 		if (token.equals("")) {
-			startActivity(new Intent(this, AuthorizationActivity.class));
+			Intent intent = new Intent(this, AuthorizationActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+			finish();
 			return;
 		}
 
@@ -161,13 +166,17 @@ public class OffenderActivity extends BaseActivity {
 		if (sendSignalButton.isEnabled()) {
 			final OffenderActivity self = this;
 			final App app = App.getApp();
+			progressBarLayout.setVisibility(RelativeLayout.VISIBLE);
 			Request req = new Request("request/photo/" + idClaim, Request.Method.POST) {
 				@Override
 				public void onSuccess(JSONObject result) {
 					try {
+						progressBarLayout.setVisibility(RelativeLayout.INVISIBLE);
 						Intent intent = new Intent(self, SignalAcceptedActivity.class);
 						intent.putExtra("id", result.getInt("signal"));
+						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 						startActivity(intent);
+						finish();
 					} catch (Exception e) {
 						Log.e("onSendSignalClicked", e.getMessage(), e);
 					}
@@ -184,26 +193,34 @@ public class OffenderActivity extends BaseActivity {
 			}
 
 			req.processMultipart(app);
-
 		}
 	}
 
 
 	@OnClick(R.id.goToMainScreenButton)
 	public void openStartPage() {
-		startActivity(ApplicationsListActivity.newInstance(this));
+		Intent intent = ApplicationsListActivity.newInstance(this);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
 	}
 
 
 	@OnClick(R.id.sendSignalNavigationButton)
-	public void openSignals(){
-		startActivity(AllSignalsActivity.newInstance(this));
+	public void openSignals() {
+		Intent intent = AllSignalsActivity.newInstance(this);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
 	}
 
 
 	@OnClick(R.id.goToMenuPageButton)
 	protected void openSettings() {
-		startActivity(new Intent(this, SettingsActivity.class));
+		Intent intent = new Intent(this, SettingsActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+		finish();
 	}
 
 

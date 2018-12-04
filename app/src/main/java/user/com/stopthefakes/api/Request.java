@@ -18,9 +18,12 @@ import org.json.JSONObject;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+//import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+//import javax.net.ssl.HttpsURLConnection;
 
 import user.com.stopthefakes.App;
 import user.com.stopthefakes.R;
@@ -39,7 +42,7 @@ public class Request {
 	private int method;
 	private App app;
 	private Map<String, String> bodyParams = new HashMap<>();
-	Map<String, String> bodyFiles = new HashMap<>();
+	private Map<String, String> bodyFiles = new HashMap<>();
 
 
 	protected Request(String url, int method, boolean useAuth) {
@@ -70,6 +73,10 @@ public class Request {
 
 	public void process(final App app) {
 		this.app = app;
+
+		if (useAuth && app.getToken().length() == 0) {
+			return;
+		}
 
 		RequestQueue queue = Volley.newRequestQueue(app);
 
